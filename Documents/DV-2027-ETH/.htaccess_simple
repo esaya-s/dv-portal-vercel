@@ -1,0 +1,9 @@
+# Simple .htaccess for Django on cPanel
+# Minimal configuration to avoid 403 errors
+
+RewriteEngine On
+
+# Route all requests to Django (except existing files)
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*)$ passenger_wsgi.py [QSA,L]

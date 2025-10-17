@@ -1,0 +1,245 @@
+{% extends 'base.html' %}
+
+{% block title %}Eligibility Requirements - DV Portal Ethiopia{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <div class="row">
+        <div class="col-lg-10 mx-auto">
+            <h1 class="mb-4">DV Program Eligibility Requirements</h1>
+            
+            <div class="alert alert-info">
+                <h5><i class="fas fa-info-circle me-2"></i>Check Your Eligibility</h5>
+                <p class="mb-0">
+                    Before applying for the US Diversity Visa program, make sure you meet all eligibility requirements.
+                </p>
+            </div>
+            
+            <div class="card mb-4">
+                <div class="card-header bg-primary text-white">
+                    <h4 class="mb-0">Country of Birth Eligibility</h4>
+                </div>
+                <div class="card-body">
+                    <p>You must be a native of a country with historically low rates of immigration to the United States.</p>
+                    
+                    <h5 class="mt-4">Eligible African Countries:</h5>
+                    <div class="row">
+                        {% for country in eligible_countries %}
+                        <div class="col-md-4 mb-2">
+                            <div class="d-flex align-items-center">
+                                <i class="fas fa-check-circle text-success me-2"></i>
+                                <span>{{ country }}</span>
+                            </div>
+                        </div>
+                        {% empty %}
+                        <div class="col-md-4 mb-2">
+                            <div class="d-flex align-items-center">
+                                <i class="fas fa-check-circle text-success me-2"></i>
+                                <span>Ethiopia</span>
+                            </div>
+                        </div>
+                        <div class="col-md-4 mb-2">
+                            <div class="d-flex align-items-center">
+                                <i class="fas fa-check-circle text-success me-2"></i>
+                                <span>Kenya</span>
+                            </div>
+                        </div>
+                        <div class="col-md-4 mb-2">
+                            <div class="d-flex align-items-center">
+                                <i class="fas fa-check-circle text-success me-2"></i>
+                                <span>Uganda</span>
+                            </div>
+                        </div>
+                        <div class="col-md-4 mb-2">
+                            <div class="d-flex align-items-center">
+                                <i class="fas fa-check-circle text-success me-2"></i>
+                                <span>Tanzania</span>
+                            </div>
+                        </div>
+                        <div class="col-md-4 mb-2">
+                            <div class="d-flex align-items-center">
+                                <i class="fas fa-check-circle text-success me-2"></i>
+                                <span>Rwanda</span>
+                            </div>
+                        </div>
+                        <div class="col-md-4 mb-2">
+                            <div class="d-flex align-items-center">
+                                <i class="fas fa-check-circle text-success me-2"></i>
+                                <span>Burundi</span>
+                            </div>
+                        </div>
+                        <div class="col-md-4 mb-2">
+                            <div class="d-flex align-items-center">
+                                <i class="fas fa-check-circle text-success me-2"></i>
+                                <span>South Sudan</span>
+                            </div>
+                        </div>
+                        <div class="col-md-4 mb-2">
+                            <div class="d-flex align-items-center">
+                                <i class="fas fa-check-circle text-success me-2"></i>
+                                <span>Somalia</span>
+                            </div>
+                        </div>
+                        <div class="col-md-4 mb-2">
+                            <div class="d-flex align-items-center">
+                                <i class="fas fa-check-circle text-success me-2"></i>
+                                <span>Eritrea</span>
+                            </div>
+                        </div>
+                        <div class="col-md-4 mb-2">
+                            <div class="d-flex align-items-center">
+                                <i class="fas fa-check-circle text-success me-2"></i>
+                                <span>Djibouti</span>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                    
+                    <div class="alert alert-warning mt-4">
+                        <p class="mb-0">
+                            <strong>Note:</strong> The list of eligible countries may change each year. The above list is for DV-2027.
+                        </p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="card mb-4">
+                <div class="card-header bg-primary text-white">
+                    <h4 class="mb-0">Education or Work Experience</h4>
+                </div>
+                <div class="card-body">
+                    <p>You must meet <strong>ONE</strong> of the following requirements:</p>
+                    
+                    <div class="card mb-3">
+                        <div class="card-body bg-light">
+                            <h5><i class="fas fa-graduation-cap me-2 text-primary"></i> Education Requirement</h5>
+                            <p class="mb-0">
+                                You must have completed a 12-year course of elementary and secondary education in Ethiopia or another country.
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <div class="card">
+                        <div class="card-body bg-light">
+                            <h5><i class="fas fa-briefcase me-2 text-primary"></i> Work Experience Requirement</h5>
+                            <p class="mb-0">
+                                You must have two years of work experience within the past five years in an occupation that requires at least two years of training or experience to perform.
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <p class="mt-4">
+                        The U.S. Department of Labor's O*Net Online database is used to determine qualifying work experience. 
+                        The occupation must be classified in Job Zone 4 or 5, and have a Specific Vocational Preparation (SVP) rating of 7.0 or higher.
+                    </p>
+                </div>
+            </div>
+            
+            <div class="card mb-4">
+                <div class="card-header bg-primary text-white">
+                    <h4 class="mb-0">Family Eligibility</h4>
+                </div>
+                <div class="card-body">
+                    <p>If you are selected, your immediate family members may also receive visas to accompany you to the United States:</p>
+                    
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">
+                            <i class="fas fa-user-friends text-primary me-2"></i>
+                            <strong>Spouse:</strong> Your legally married husband or wife
+                        </li>
+                        <li class="list-group-item">
+                            <i class="fas fa-child text-primary me-2"></i>
+                            <strong>Children:</strong> Unmarried children under 21 years of age
+                        </li>
+                    </ul>
+                    
+                    <div class="alert alert-warning mt-3">
+                        <p class="mb-0">
+                            <strong>Important:</strong> You must list ALL eligible family members on your application, even if they do not plan to immigrate with you. Failure to do so may result in disqualification.
+                        </p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="card mb-4">
+                <div class="card-header bg-primary text-white">
+                    <h4 class="mb-0">Additional Requirements</h4>
+                </div>
+                <div class="card-body">
+                    <p>If selected, you must also meet these additional requirements:</p>
+                    
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="card mb-3">
+                                <div class="card-body">
+                                    <h5><i class="fas fa-passport me-2 text-primary"></i> Valid Passport</h5>
+                                    <p class="mb-0">
+                                        You must have a valid, unexpired passport at the time of your visa interview.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="card mb-3">
+                                <div class="card-body">
+                                    <h5><i class="fas fa-heartbeat me-2 text-primary"></i> Medical Examination</h5>
+                                    <p class="mb-0">
+                                        You must undergo a medical examination by an authorized physician.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="card mb-3">
+                                <div class="card-body">
+                                    <h5><i class="fas fa-gavel me-2 text-primary"></i> No Criminal Record</h5>
+                                    <p class="mb-0">
+                                        You must not have been convicted of certain crimes or violations.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h5><i class="fas fa-hand-holding-usd me-2 text-primary"></i> Financial Support</h5>
+                                    <p class="mb-0">
+                                        You must demonstrate that you will not become a public charge in the US.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="card">
+                <div class="card-header bg-primary text-white">
+                    <h4 class="mb-0">How We Can Help</h4>
+                </div>
+                <div class="card-body">
+                    <p>
+                        DV Portal Ethiopia provides comprehensive assistance to ensure your application meets all eligibility requirements:
+                    </p>
+                    
+                    <ul>
+                        <li>Verification of your eligibility status</li>
+                        <li>Documentation review and validation</li>
+                        <li>AI-powered photo validation against US requirements</li>
+                        <li>Complete application form assistance</li>
+                        <li>Guidance on education and work experience documentation</li>
+                        <li>Family member inclusion assistance</li>
+                    </ul>
+                    
+                    <div class="text-center mt-4">
+                        <a href="#" onclick="alert('Registration coming soon! This is a demo of the beautiful styling.')" class="btn btn-primary btn-lg">
+                            <i class="fas fa-check-circle me-2"></i>
+                            Check My Eligibility
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

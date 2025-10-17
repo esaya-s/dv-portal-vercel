@@ -1,0 +1,219 @@
+{% extends "admin/base_site.html" %}
+{% load i18n admin_urls static admin_modify %}
+
+{% block title %}Telegram Bot Analytics{% endblock %}
+
+{% block breadcrumbs %}
+<div class="breadcrumbs">
+    <a href="{% url 'admin:index' %}">{% trans 'Home' %}</a>
+    &rsaquo; <a href="{% url 'admin:notifications_telegramuser_changelist' %}">Telegram Users</a>
+    &rsaquo; Bot Analytics
+</div>
+{% endblock %}
+
+{% block content %}
+<div class="module">
+    <h1>🤖 Telegram Bot Analytics Dashboard</h1>
+    
+    <!-- Statistics Cards -->
+    <div class="results" style="margin-bottom: 20px;">
+        <div style="display: flex; gap: 20px; flex-wrap: wrap;">
+            <div style="background: #f8f9fa; padding: 20px; border-radius: 8px; min-width: 200px; text-align: center;">
+                <h3 style="margin: 0; color: #007cba;">{{ total_users }}</h3>
+                <p style="margin: 5px 0 0 0; color: #666;">Total Bot Users</p>
+            </div>
+            <div style="background: #e8f5e8; padding: 20px; border-radius: 8px; min-width: 200px; text-align: center;">
+                <h3 style="margin: 0; color: #28a745;">{{ active_users }}</h3>
+                <p style="margin: 5px 0 0 0; color: #666;">Active Users</p>
+            </div>
+            <div style="background: #fff3cd; padding: 20px; border-radius: 8px; min-width: 200px; text-align: center;">
+                <h3 style="margin: 0; color: #856404;">{{ admin_users }}</h3>
+                <p style="margin: 5px 0 0 0; color: #666;">Admin Users</p>
+            </div>
+            <div style="background: #f8d7da; padding: 20px; border-radius: 8px; min-width: 200px; text-align: center;">
+                <h3 style="margin: 0; color: #721c24;">{{ blocked_users }}</h3>
+                <p style="margin: 5px 0 0 0; color: #666;">Blocked Users</p>
+            </div>
+            <div style="background: #d1ecf1; padding: 20px; border-radius: 8px; min-width: 200px; text-align: center;">
+                <h3 style="margin: 0; color: #0c5460;">{{ users_with_apps }}</h3>
+                <p style="margin: 5px 0 0 0; color: #666;">Users with Applications</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Application Status Distribution -->
+    <div class="module" style="margin-bottom: 20px;">
+        <h2>📊 Application Status Distribution</h2>
+        <table style="width: 100%; border-collapse: collapse;">
+            <thead>
+                <tr style="background: #f8f9fa;">
+                    <th style="padding: 10px; border: 1px solid #ddd;">Status</th>
+                    <th style="padding: 10px; border: 1px solid #ddd;">Count</th>
+                    <th style="padding: 10px; border: 1px solid #ddd;">Percentage</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for stat in app_status_stats %}
+                <tr>
+                    <td style="padding: 10px; border: 1px solid #ddd;">{{ stat.status|title }}</td>
+                    <td style="padding: 10px; border: 1px solid #ddd;">{{ stat.count }}</td>
+                    <td style="padding: 10px; border: 1px solid #ddd;">
+                        {% widthratio stat.count total_users 100 %}%
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Recent Users -->
+    <div class="module" style="margin-bottom: 20px;">
+        <h2>👥 Recent Bot Users</h2>
+        <table style="width: 100%; border-collapse: collapse;">
+            <thead>
+                <tr style="background: #f8f9fa;">
+                    <th style="padding: 10px; border: 1px solid #ddd;">Username</th>
+                    <th style="padding: 10px; border: 1px solid #ddd;">Name</th>
+                    <th style="padding: 10px; border: 1px solid #ddd;">Chat ID</th>
+                    <th style="padding: 10px; border: 1px solid #ddd;">Status</th>
+                    <th style="padding: 10px; border: 1px solid #ddd;">Created</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for user in recent_users %}
+                <tr>
+                    <td style="padding: 10px; border: 1px solid #ddd;">
+                        {% if user.username %}
+                            @{{ user.username }}
+                        {% else %}
+                            -
+                        {% endif %}
+                    </td>
+                    <td style="padding: 10px; border: 1px solid #ddd;">
+                        {{ user.first_name }} {{ user.last_name }}
+                    </td>
+                    <td style="padding: 10px; border: 1px solid #ddd;">{{ user.chat_id }}</td>
+                    <td style="padding: 10px; border: 1px solid #ddd;">
+                        {% if user.is_admin %}
+                            <span style="color: #856404;">Admin</span>
+                        {% elif user.is_blocked %}
+                            <span style="color: #721c24;">Blocked</span>
+                        {% else %}
+                            <span style="color: #28a745;">Active</span>
+                        {% endif %}
+                    </td>
+                    <td style="padding: 10px; border: 1px solid #ddd;">{{ user.created_at|date:"M d, Y H:i" }}</td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="5" style="padding: 20px; text-align: center; color: #666;">No bot users found</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Recent Notifications -->
+    <div class="module">
+        <h2>📨 Recent Notifications</h2>
+        <table style="width: 100%; border-collapse: collapse;">
+            <thead>
+                <tr style="background: #f8f9fa;">
+                    <th style="padding: 10px; border: 1px solid #ddd;">User</th>
+                    <th style="padding: 10px; border: 1px solid #ddd;">Application</th>
+                    <th style="padding: 10px; border: 1px solid #ddd;">Status</th>
+                    <th style="padding: 10px; border: 1px solid #ddd;">Created</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for notification in recent_notifications %}
+                <tr>
+                    <td style="padding: 10px; border: 1px solid #ddd;">
+                        {% if notification.telegram_user %}
+                            {{ notification.telegram_user.first_name }} {{ notification.telegram_user.last_name }}
+                        {% else %}
+                            -
+                        {% endif %}
+                    </td>
+                    <td style="padding: 10px; border: 1px solid #ddd;">
+                        {% if notification.application %}
+                            <a href="{% url 'admin:applications_dvapplication_change' notification.application.pk %}">
+                                {{ notification.application.dv_id }}
+                            </a>
+                        {% else %}
+                            -
+                        {% endif %}
+                    </td>
+                    <td style="padding: 10px; border: 1px solid #ddd;">
+                        {% if notification.sent %}
+                            <span style="color: #28a745;">✓ Sent</span>
+                        {% else %}
+                            <span style="color: #dc3545;">✗ Failed</span>
+                        {% endif %}
+                    </td>
+                    <td style="padding: 10px; border: 1px solid #ddd;">{{ notification.created_at|date:"M d, Y H:i" }}</td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="4" style="padding: 20px; text-align: center; color: #666;">No notifications found</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Quick Actions -->
+    <div class="module" style="margin-top: 20px;">
+        <h2>⚡ Quick Actions</h2>
+        <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+            <a href="{% url 'admin:notifications_telegramuser_changelist' %}" 
+               style="background: #007cba; color: white; padding: 10px 20px; text-decoration: none; border-radius: 4px;">
+                📋 View All Telegram Users
+            </a>
+            <a href="{% url 'admin:notifications_telegramnotification_changelist' %}" 
+               style="background: #28a745; color: white; padding: 10px 20px; text-decoration: none; border-radius: 4px;">
+                📨 View All Notifications
+            </a>
+            <a href="{% url 'admin:applications_dvapplication_changelist' %}" 
+               style="background: #856404; color: white; padding: 10px 20px; text-decoration: none; border-radius: 4px;">
+                📝 View All Applications
+            </a>
+        </div>
+    </div>
+</div>
+
+<style>
+.module h1 {
+    color: #333;
+    border-bottom: 2px solid #007cba;
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+}
+
+.module h2 {
+    color: #555;
+    margin-top: 20px;
+    margin-bottom: 15px;
+}
+
+.results {
+    margin: 20px 0;
+}
+
+table {
+    margin-top: 10px;
+}
+
+th, td {
+    text-align: left;
+}
+
+tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+tr:hover {
+    background-color: #f5f5f5;
+}
+</style>
+{% endblock %}

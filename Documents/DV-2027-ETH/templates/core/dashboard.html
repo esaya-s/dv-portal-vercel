@@ -1,0 +1,295 @@
+{% extends 'base.html' %}
+
+{% block title %}Dashboard - DV Portal Ethiopia{% endblock %}
+
+{% block content %}
+<div class="container-fluid py-4">
+    <div class="row">
+        <div class="col-12">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <div>
+                    <h1>Welcome back, {{ user.get_full_name|default:user.username }}!</h1>
+                    <p class="text-muted">Manage your DV applications and track your progress</p>
+                </div>
+                <div>
+                    <a href="{% url 'applications:create' %}" class="btn btn-primary btn-lg">
+                        <i class="fas fa-plus me-2"></i>
+                        New Application
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Profile Status -->
+    <div class="row mb-4">
+        <div class="col-12">
+            {% if not profile_completed %}
+            <div class="alert alert-warning" role="alert">
+                <h5><i class="fas fa-exclamation-triangle me-2"></i>Complete Your Profile</h5>
+                <p class="mb-2">Please complete your profile to ensure smooth application processing.</p>
+                <a href="{% url 'accounts:profile_edit' %}" class="btn btn-warning">Complete Profile</a>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+    
+    <!-- Quick Stats -->
+    <div class="row g-3 mb-4">
+        <div class="col-md-3">
+            <div class="card bg-primary text-white">
+                <div class="card-body">
+                    <div class="d-flex align-items-center">
+                        <div class="me-3">
+                            <i class="fas fa-file-alt fa-2x"></i>
+                        </div>
+                        <div>
+                            <h5 class="card-title">{{ applications.count }}</h5>
+                            <p class="card-text mb-0">Total Applications</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-md-3">
+            <div class="card bg-success text-white">
+                <div class="card-body">
+                    <div class="d-flex align-items-center">
+                        <div class="me-3">
+                            <i class="fas fa-check-circle fa-2x"></i>
+                        </div>
+                        <div>
+                            <h5 class="card-title">{{ applications|dictsort:"status"|dictsort:"approved"|length }}</h5>
+                            <p class="card-text mb-0">Approved</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-md-3">
+            <div class="card bg-warning text-white">
+                <div class="card-body">
+                    <div class="d-flex align-items-center">
+                        <div class="me-3">
+                            <i class="fas fa-clock fa-2x"></i>
+                        </div>
+                        <div>
+                            <h5 class="card-title">{{ applications|dictsort:"status"|dictsort:"under_review"|length }}</h5>
+                            <p class="card-text mb-0">Under Review</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-md-3">
+            <div class="card bg-info text-white">
+                <div class="card-body">
+                    <div class="d-flex align-items-center">
+                        <div class="me-3">
+                            <i class="fas fa-credit-card fa-2x"></i>
+                        </div>
+                        <div>
+                            <h5 class="card-title">{{ payments.count }}</h5>
+                            <p class="card-text mb-0">Payments Made</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="row">
+        <!-- Applications Section -->
+        <div class="col-lg-8">
+            <div class="card">
+                <div class="card-header d-flex justify-content-between align-items-center">
+                    <h5 class="mb-0">My Applications</h5>
+                    <a href="{% url 'applications:list' %}" class="btn btn-sm btn-outline-primary">View All</a>
+                </div>
+                <div class="card-body">
+                    {% if applications %}
+                    <div class="table-responsive">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th>Confirmation Number</th>
+                                    <th>Applicant</th>
+                                    <th>Status</th>
+                                    <th>Created</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for application in applications|slice:":5" %}
+                                <tr>
+                                    <td>
+                                        <code>{{ application.confirmation_number }}</code>
+                                    </td>
+                                    <td>{{ application.get_full_name }}</td>
+                                    <td>
+                                        <span class="status-badge status-{{ application.status }}">
+                                            {{ application.get_status_display }}
+                                        </span>
+                                    </td>
+                                    <td>{{ application.created_at|date:"M d, Y" }}</td>
+                                    <td>
+                                        <a href="{% url 'applications:detail' application.confirmation_number %}" 
+                                           class="btn btn-sm btn-outline-primary">
+                                            View
+                                        </a>
+                                        {% if application.is_editable %}
+                                        <a href="{% url 'applications:edit' application.confirmation_number %}" 
+                                           class="btn btn-sm btn-outline-secondary">
+                                            Edit
+                                        </a>
+                                        {% endif %}
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                    {% else %}
+                    <div class="text-center py-4">
+                        <i class="fas fa-file-plus fa-3x text-muted mb-3"></i>
+                        <h5>No Applications Yet</h5>
+                        <p class="text-muted mb-3">Start your DV application journey today!</p>
+                        <a href="{% url 'applications:create' %}" class="btn btn-primary">
+                            Create First Application
+                        </a>
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+            
+            <!-- Recent Payments -->
+            <div class="card mt-4">
+                <div class="card-header d-flex justify-content-between align-items-center">
+                    <h5 class="mb-0">Recent Payments</h5>
+                    <a href="{% url 'payments:list' %}" class="btn btn-sm btn-outline-primary">View All</a>
+                </div>
+                <div class="card-body">
+                    {% if payments %}
+                    <div class="table-responsive">
+                        <table class="table table-sm">
+                            <thead>
+                                <tr>
+                                    <th>Amount</th>
+                                    <th>Method</th>
+                                    <th>Status</th>
+                                    <th>Date</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for payment in payments|slice:":3" %}
+                                <tr>
+                                    <td>{{ payment.amount }} {{ payment.currency }}</td>
+                                    <td>{{ payment.get_payment_method_display }}</td>
+                                    <td>
+                                        <span class="status-badge status-{{ payment.status }}">
+                                            {{ payment.get_status_display }}
+                                        </span>
+                                    </td>
+                                    <td>{{ payment.created_at|date:"M d, Y" }}</td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                    {% else %}
+                    <p class="text-muted text-center py-3">No payments yet</p>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        
+        <!-- Sidebar -->
+        <div class="col-lg-4">
+            <!-- Quick Actions -->
+            <div class="card">
+                <div class="card-header">
+                    <h6 class="mb-0">Quick Actions</h6>
+                </div>
+                <div class="card-body">
+                    <div class="d-grid gap-2">
+                        <a href="{% url 'applications:create' %}" class="btn btn-primary">
+                            <i class="fas fa-plus me-2"></i>
+                            New Application
+                        </a>
+                        <a href="{% url 'payments:instructions' %}" class="btn btn-outline-primary">
+                            <i class="fas fa-credit-card me-2"></i>
+                            Payment Instructions
+                        </a>
+                        <a href="{% url 'core:instructions' %}" class="btn btn-outline-primary">
+                            <i class="fas fa-book me-2"></i>
+                            Application Guide
+                        </a>
+                        <a href="{% url 'notifications:telegram_setup' %}" class="btn btn-outline-primary">
+                            <i class="fab fa-telegram me-2"></i>
+                            Setup Telegram
+                        </a>
+                        <a href="{% url 'core:contact' %}" class="btn btn-outline-primary">
+                            <i class="fas fa-support me-2"></i>
+                            Get Support
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Recent Notifications -->
+            <div class="card mt-3">
+                <div class="card-header d-flex justify-content-between align-items-center">
+                    <h6 class="mb-0">Recent Notifications</h6>
+                    <a href="{% url 'notifications:list' %}" class="btn btn-sm btn-outline-primary">View All</a>
+                </div>
+                <div class="card-body">
+                    {% if notifications %}
+                    {% for notification in notifications %}
+                    <div class="d-flex align-items-start mb-3 {% if not forloop.last %}border-bottom pb-3{% endif %}">
+                        <div class="flex-shrink-0 me-3">
+                            {% if notification.notification_type == 'application_submitted' %}
+                            <i class="fas fa-paper-plane text-primary"></i>
+                            {% elif notification.notification_type == 'payment_approved' %}
+                            <i class="fas fa-check-circle text-success"></i>
+                            {% elif notification.notification_type == 'application_approved' %}
+                            <i class="fas fa-thumbs-up text-success"></i>
+                            {% else %}
+                            <i class="fas fa-bell text-info"></i>
+                            {% endif %}
+                        </div>
+                        <div class="flex-grow-1">
+                            <p class="mb-1 small">{{ notification.message|truncatewords:10 }}</p>
+                            <small class="text-muted">{{ notification.created_at|timesince }} ago</small>
+                        </div>
+                    </div>
+                    {% endfor %}
+                    {% else %}
+                    <p class="text-muted text-center py-3 mb-0">No notifications yet</p>
+                    {% endif %}
+                </div>
+            </div>
+            
+            <!-- Announcements -->
+            {% if announcements %}
+            <div class="card mt-3">
+                <div class="card-header">
+                    <h6 class="mb-0">Important Announcements</h6>
+                </div>
+                <div class="card-body">
+                    {% for announcement in announcements %}
+                    <div class="mb-3 {% if not forloop.last %}border-bottom pb-3{% endif %}">
+                        <h6 class="mb-1">{{ announcement.title }}</h6>
+                        <p class="mb-1 small">{{ announcement.content|truncatewords:15 }}</p>
+                        <small class="text-muted">{{ announcement.created_at|date:"M d, Y" }}</small>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}

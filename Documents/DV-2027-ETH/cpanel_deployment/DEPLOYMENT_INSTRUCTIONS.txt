@@ -1,0 +1,39 @@
+🚀 Django Deployment Instructions for cPanel 
+================================================ 
+ 
+📋 Prerequisites: 
+- cPanel with Python App support 
+- Python 3.8+ enabled 
+ 
+🔧 Deployment Steps: 
+ 
+1. Upload Files: 
+   - Upload this entire folder to your cPanel public_html directory 
+ 
+2. Create Python App in cPanel: 
+   - Go to "Python App" in cPanel 
+   - Create a new Python application 
+   - Set the app directory to: public_html/cpanel_deployment 
+   - Set the app URL to: anvilu.com 
+   - Choose Python version 3.8 or higher 
+ 
+3. Install Dependencies: 
+   - In the Python App interface, go to "Packages" 
+   - Install the packages from requirements.txt 
+ 
+4. Run Django Commands: 
+   - In Python App terminal, run: 
+     python manage.py migrate 
+     python manage.py collectstatic --noinput 
+     python manage.py createsuperuser 
+ 
+5. Start the Application: 
+   - The Python App should automatically start 
+ 
+🌐 Access Your Site: 
+- Main Site: http://anvilu.com 
+- Admin Panel: http://anvilu.com/admin/ 
+ 
+👤 Admin Credentials: 
+- Username: admin 
+- Password: admin123 

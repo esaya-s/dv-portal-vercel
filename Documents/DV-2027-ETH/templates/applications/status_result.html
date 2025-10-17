@@ -1,0 +1,141 @@
+{% extends 'base.html' %}
+
+{% block title %}Application Status - DV Portal Ethiopia{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            <div class="card shadow-sm">
+                <div class="card-header bg-primary text-white text-center py-4">
+                    <h2 class="mb-0"><i class="fas fa-clipboard-check me-2"></i>Application Status</h2>
+                </div>
+                <div class="card-body p-5">
+                    {% if messages %}
+                        {% for message in messages %}
+                            <div class="alert alert-{{ message.tags }} mb-4">
+                                {{ message }}
+                            </div>
+                        {% endfor %}
+                    {% endif %}
+                    
+                    {% if application %}
+                        <div class="text-center mb-4">
+                            <div class="display-6 fw-bold mb-2">{{ application.dv_id }}</div>
+                            
+                            {% if application.status == 'pending' %}
+                                <span class="badge bg-warning text-dark p-2 fs-5">Pending</span>
+                            {% elif application.status == 'under_review' %}
+                                <span class="badge bg-info text-dark p-2 fs-5">Under Review</span>
+                            {% elif application.status == 'approved' %}
+                                <span class="badge bg-success p-2 fs-5">Approved</span>
+                            {% elif application.status == 'rejected' %}
+                                <span class="badge bg-danger p-2 fs-5">Rejected</span>
+                            {% else %}
+                                <span class="badge bg-secondary p-2 fs-5">{{ application.status|title }}</span>
+                            {% endif %}
+                        </div>
+                        
+                        <div class="card mb-4">
+                            <div class="card-header bg-light">
+                                <h5 class="mb-0">Application Details</h5>
+                            </div>
+                            <div class="card-body">
+                                <div class="row mb-3">
+                                    <div class="col-sm-4">
+                                        <strong>Full Name</strong>
+                                    </div>
+                                    <div class="col-sm-8">
+                                        {{ application.first_name }} {% if application.middle_name %}{{ application.middle_name }}{% endif %} {{ application.last_name }}
+                                    </div>
+                                </div>
+                                
+                                <div class="row mb-3">
+                                    <div class="col-sm-4">
+                                        <strong>Date Submitted</strong>
+                                    </div>
+                                    <div class="col-sm-8">
+                                        {{ application.created_at|date:"F j, Y, g:i a" }}
+                                    </div>
+                                </div>
+                                
+                                <div class="row mb-3">
+                                    <div class="col-sm-4">
+                                        <strong>Payment Verification</strong>
+                                    </div>
+                                    <div class="col-sm-8">
+                                        {% if application.payment_verified %}
+                                            <span class="text-success"><i class="fas fa-check-circle me-1"></i> Verified</span>
+                                        {% else %}
+                                            <span class="text-warning"><i class="fas fa-clock me-1"></i> Pending Verification</span>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                                
+                                <div class="row mb-3">
+                                    <div class="col-sm-4">
+                                        <strong>Photo Validation</strong>
+                                    </div>
+                                    <div class="col-sm-8">
+                                        {% if application.photo_validation_passed %}
+                                            <span class="text-success"><i class="fas fa-check-circle me-1"></i> Passed</span>
+                                        {% else %}
+                                            {% if application.photo_validation_message %}
+                                                <span class="text-danger"><i class="fas fa-times-circle me-1"></i> Failed</span>
+                                                <p class="text-danger small mt-1">{{ application.photo_validation_message }}</p>
+                                            {% else %}
+                                                <span class="text-warning"><i class="fas fa-clock me-1"></i> Pending Validation</span>
+                                            {% endif %}
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        {% if application.status == 'rejected' and application.data_validation_message %}
+                            <div class="alert alert-danger mb-4">
+                                <h5 class="alert-heading">Reason for Rejection</h5>
+                                <p class="mb-0">{{ application.data_validation_message }}</p>
+                            </div>
+                        {% endif %}
+                        
+                        <div class="alert alert-info mb-4">
+                            <h5 class="alert-heading">What's Next?</h5>
+                            
+                            {% if application.status == 'pending' %}
+                                <p class="mb-0">Your application is in our queue and will be reviewed shortly. Please check back in 24-48 hours.</p>
+                            {% elif application.status == 'under_review' %}
+                                <p class="mb-0">Our team is currently reviewing your application. You will be notified once the review is complete.</p>
+                            {% elif application.status == 'approved' %}
+                                <p class="mb-0">Congratulations! Your application has been approved and submitted to the DV program. You will be notified of any updates.</p>
+                            {% elif application.status == 'rejected' %}
+                                <p class="mb-0">Unfortunately, your application has been rejected. Please review the reason above and contact our support team for assistance.</p>
+                            {% endif %}
+                        </div>
+                        
+                        <div class="d-grid gap-3">
+                            <a href="{% url 'applications:status' %}" class="btn btn-primary">
+                                <i class="fas fa-search me-2"></i>Check Another Application
+                            </a>
+                            <a href="{% url 'core:contact' %}" class="btn btn-outline-secondary">
+                                <i class="fas fa-headset me-2"></i>Contact Support
+                            </a>
+                        </div>
+                    {% else %}
+                        <div class="alert alert-danger mb-4">
+                            <h5 class="alert-heading">Application Not Found</h5>
+                            <p class="mb-0">We couldn't find an application with the provided ID. Please check the ID and try again.</p>
+                        </div>
+                        
+                        <div class="d-grid">
+                            <a href="{% url 'applications:status' %}" class="btn btn-primary btn-lg">
+                                <i class="fas fa-search me-2"></i>Try Again
+                            </a>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

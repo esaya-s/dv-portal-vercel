@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block title %}Register - DV Portal Ethiopia{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            <div class="card shadow-lg border-0">
+                <div class="card-header bg-primary text-white text-center py-4">
+                    <h2 class="mb-0"><i class="fas fa-user-plus me-2"></i>Join DV Portal Ethiopia</h2>
+                    <p class="mb-0">Start your US Diversity Visa journey today</p>
+                </div>
+                <div class="card-body p-5">
+                    <div class="alert alert-info">
+                        <h5><i class="fas fa-info-circle me-2"></i>Why Register?</h5>
+                        <ul class="mb-0">
+                            <li>Professional DV application assistance</li>
+                            <li>AI-powered photo and data validation</li>
+                            <li>Telegram notifications for updates</li>
+                            <li>Secure application tracking</li>
+                            <li>Expert support throughout the process</li>
+                        </ul>
+                    </div>
+                    
+                    {% crispy form %}
+                    
+                    <div class="text-center mt-4">
+                        <p>Already have an account? 
+                            <a href="{% url 'accounts:login' %}" class="text-primary fw-bold">Login here</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

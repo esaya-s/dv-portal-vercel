@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}DV Portal - Ethiopia Diversity Visa Program{% endblock %}</title>
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@300;400;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            /* USA.gov official colors */
+            --primary-blue: #112e51;
+            --secondary-blue: #205493;
+            --light-blue: #dce4ef;
+            --accent-blue: #02bfe7;
+            --red: #e31c3d;
+            --green: #2e8540;
+            --gray-100: #f1f1f1;
+            --gray-600: #5b616b;
+            --gray-800: #323a45;
+            --usa-red: #e31c3d;
+            --usa-dark-red: #981b1e;
+            --usa-blue: #0071bc;
+        }
+        
+        body {
+            font-family: 'Source Sans Pro', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            background-color: #ffffff;
+        }
+        
+        /* Header styles matching official US government sites */
+        .usa-banner {
+            background-color: var(--gray-100);
+            border-bottom: 1px solid #d6d7d9;
+            font-size: 0.8rem;
+            padding: 8px 0;
+            font-weight: 400;
+        }
+        
+        .main-header {
+            background-color: var(--primary-blue);
+            color: white;
+            padding: 1rem 0;
+        }
+        
+        .main-header .navbar-brand {
+            color: white !important;
+            font-weight: 700;
+            font-size: 1.5rem;
+        }
+        
+        .main-header .navbar-nav .nav-link {
+            color: white !important;
+            font-weight: 500;
+            margin: 0 0.5rem;
+            padding: 0.5rem 1rem !important;
+            border-radius: 0;
+            transition: background-color 0.2s;
+        }
+        
+        .main-header .navbar-nav .nav-link:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+            text-decoration: underline;
+        }
+        
+        .main-header .btn-outline-light {
+            border-color: white;
+            color: white;
+            border-radius: 3px;
+        }
+        
+        /* Hero section */
+        .hero-section {
+            background: linear-gradient(135deg, var(--primary-blue), var(--secondary-blue));
+            color: white;
+            padding: 4rem 0;
+            text-align: center;
+        }
+        
+        .hero-section h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+        }
+        
+        .hero-section p {
+            font-size: 1.25rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+        
+        /* Card styles */
+        .card {
+            border: 1px solid #ddd;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+            transition: transform 0.2s, box-shadow 0.2s;
+            border-radius: 3px;
+        }
+        
+        .card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        
+        .card-header {
+            background-color: var(--primary-blue);
+            border-bottom: 1px solid #d6d7d9;
+            font-weight: 600;
+            color: white;
+        }
+        
+        /* Status badges */
+        .status-badge {
+            padding: 0.375rem 0.75rem;
+            border-radius: 3px;
+            font-size: 0.875rem;
+            font-weight: 500;
+        }
+        
+        .status-draft { background-color: #f1f1f1; color: #323a45; }
+        .status-pending { background-color: #fdb81e; color: #212121; }
+        .status-under-review { background-color: #02bfe7; color: #212121; }
+        .status-approved { background-color: #2e8540; color: white; }
+        .status-rejected { background-color: #e31c3d; color: white; }
+        
+        /* Footer */
+        .footer {
+            background: linear-gradient(135deg, var(--primary-blue) 0%, var(--secondary-blue) 100%);
+            color: white;
+            padding: 3rem 0 1rem;
+            margin-top: auto;
+            border-top: 3px solid var(--accent-blue);
+        }
+        
+        .footer h5 {
+            color: white;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+            border-bottom: 2px solid var(--accent-blue);
+            padding-bottom: 0.5rem;
+            display: inline-block;
+        }
+        
+        .footer a {
+            color: #dce4ef;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        
+        .footer a:hover {
+            color: var(--accent-blue);
+            text-decoration: none;
+        }
+        
+        .footer .list-unstyled li {
+            margin-bottom: 0.5rem;
+        }
+        
+        .footer .text-muted {
+            color: #b3c7d9 !important;
+        }
+        
+        .footer hr {
+            border-color: var(--accent-blue);
+            opacity: 0.3;
+        }
+        
+        /* Custom buttons - match USA.gov */
+        .btn {
+            border-radius: 3px;
+            font-weight: 700;
+        }
+        
+        .btn-primary {
+            background-color: var(--usa-blue);
+            border-color: var(--usa-blue);
+        }
+        
+        .btn-primary:hover {
+            background-color: #205493;
+            border-color: #205493;
+        }
+        
+        .btn-success {
+            background-color: var(--green);
+            border-color: var(--green);
+        }
+        
+        .btn-light {
+            background-color: white;
+            border-color: #d6d7d9;
+            color: #212121;
+        }
+        
+        /* Form styling */
+        .form-control {
+            border-radius: 3px;
+            border: 1px solid #5b616b;
+            padding: 0.5rem 0.75rem;
+        }
+        
+        .form-control:focus {
+            border-color: var(--accent-blue);
+            box-shadow: 0 0 0 0.2rem rgba(2, 191, 231, 0.25);
+        }
+        
+        /* Alert styling */
+        .alert {
+            border-radius: 3px;
+        }
+        
+        .alert-info {
+            background-color: var(--light-blue);
+            border-color: #02bfe7;
+            color: #212121;
+        }
+        
+        /* Progress bar */
+        .progress {
+            border-radius: 3px;
+            height: 0.5rem;
+        }
+        
+        .progress-bar {
+            background-color: var(--usa-blue);
+        }
+        
+        /* Responsive utilities */
+        @media (max-width: 768px) {
+            .hero-section h1 {
+                font-size: 2rem;
+            }
+            
+            .hero-section p {
+                font-size: 1rem;
+            }
+        }
+    </style>
+    
+    {% block extra_css %}{% endblock %}
+</head>
+<body class="d-flex flex-column min-vh-100">
+    
+    <!-- US Government Banner (matching official sites) -->
+    <div class="usa-banner">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-auto">
+                    <img src="{% static 'core/U.S._Department_of_State_official_seal.svg.png' %}" alt="U.S. Department of State" height="20" class="me-2">
+                </div>
+                    <div class="col-auto">
+                        <img src="{% static 'core/usa.png' %}" alt="U.S. flag" width="20" height="13" class="me-2">
+                    </div>
+                <div class="col">
+                    <span><strong>An official website of the United States government</strong> | Program assistance for Ethiopia</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Main Navigation -->
+    <header class="main-header">
+        <nav class="navbar navbar-expand-lg">
+            <div class="container">
+                <a class="navbar-brand" href="{% url 'core:home' %}">
+                    <img src="{% static 'core/U.S._Department_of_State_official_seal.svg.png' %}" alt="U.S. Department of State" height="30" class="me-2">
+                    DV Portal Ethiopia
+                </a>
+                
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav me-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'core:home' %}">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'core:about' %}">About</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'core:eligibility' %}">Eligibility</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'core:instructions' %}">Instructions</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'core:faq' %}">FAQ</a>
+                        </li>
+                        {% if user.is_authenticated %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="/applications/status/">My Applications</a>
+                        </li>
+                        {% endif %}
+                    </ul>
+                    
+                    <ul class="navbar-nav">
+                        {% if user.is_authenticated %}
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                                <i class="fas fa-user me-1"></i>
+                                {{ user.get_full_name|default:user.username }}
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="{% url 'core:dashboard' %}">Dashboard</a></li>
+                                <li><a class="dropdown-item" href="/admin/">Admin Panel</a></li>
+                                <li><a class="dropdown-item" href="#">Notifications</a></li>
+                                <li><hr class="dropdown-divider"></li>
+                                <li><a class="dropdown-item" href="/admin/logout/">Logout</a></li>
+                            </ul>
+                        </li>
+                        {% else %}
+                        <li class="nav-item">
+                            <a class="btn btn-light" href="/applications/status/">Check Status</a>
+                        </li>
+                        {% endif %}
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+    
+    <!-- Main Content -->
+    <main class="flex-grow-1">
+        {% if messages %}
+        <div class="container mt-3">
+            {% for message in messages %}
+            <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+                {{ message }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            </div>
+            {% endfor %}
+        </div>
+        {% endif %}
+        
+        {% block content %}{% endblock %}
+    </main>
+    
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <h5><i class="fas fa-passport me-2"></i>DV Portal Ethiopia</h5>
+                        <p class="text-muted">
+                            Helping Ethiopians participate in the US Diversity Visa Program.
+                            Professional application assistance and guidance.
+                        </p>
+                </div>
+                <div class="col-lg-2 col-md-6 mb-4">
+                    <h5><i class="fas fa-link me-2"></i>Quick Links</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="{% url 'core:home' %}"><i class="fas fa-home me-1"></i>Home</a></li>
+                        <li><a href="{% url 'core:about' %}"><i class="fas fa-info-circle me-1"></i>About</a></li>
+                        <li><a href="{% url 'core:eligibility' %}"><i class="fas fa-check-circle me-1"></i>Eligibility</a></li>
+                        <li><a href="{% url 'core:faq' %}"><i class="fas fa-question-circle me-1"></i>FAQ</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-2 col-md-6 mb-4">
+                    <h5><i class="fas fa-headset me-2"></i>Support</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="{% url 'core:contact' %}"><i class="fas fa-envelope me-1"></i>Contact Us</a></li>
+                        <li><a href="{% url 'core:instructions' %}"><i class="fas fa-book me-1"></i>Instructions</a></li>
+                        <li><a href="#" onclick="alert('Payment information: Commercial Bank of Ethiopia (CBE) only. Upload proof with your application form.')"><i class="fas fa-credit-card me-1"></i>Payment Info</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <h5><i class="fas fa-map-marker-alt me-2"></i>Contact Information</h5>
+                    <ul class="list-unstyled text-muted">
+                        <li class="mb-2"><i class="fas fa-envelope me-2"></i> support@dvportal-ethiopia.com</li>
+                            <li class="mb-2"><i class="fab fa-telegram me-2"></i> @dv2027apply</li>
+                            <li class="mb-2"><i class="fas fa-phone me-2"></i> +251-963-173-312</li>
+                        <li class="mb-2"><i class="fas fa-map-marker-alt me-2"></i> Addis Ababa, Ethiopia</li>
+                    </ul>
+                </div>
+            </div>
+            <hr class="my-4">
+            <div class="row align-items-center">
+                <div class="col-md-6">
+                    <p class="mb-0 text-muted">
+                        <i class="fas fa-copyright me-1"></i>
+                        {% now "Y" %} DV Portal Ethiopia. All rights reserved.
+                    </p>
+                </div>
+                <div class="col-md-6 text-md-end">
+                    <a href="{% url 'privacy_policy' %}" class="me-3"><i class="fas fa-shield-alt me-1"></i>Privacy Policy</a>
+                    <a href="{% url 'terms_of_service' %}"><i class="fas fa-file-contract me-1"></i>Terms of Service</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+    
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    {% block extra_js %}{% endblock %}
+</body>
+</html>

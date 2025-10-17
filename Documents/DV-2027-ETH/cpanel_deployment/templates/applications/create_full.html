@@ -1,0 +1,524 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% load static %}
+
+{% block title %}Complete DV-2027 Application - DV Portal Ethiopia{% endblock %}
+
+{% block extra_css %}
+<style>
+    /* Styles to match the official DV website */
+    .dv-form {
+        background-color: #fff;
+        border: 1px solid #ddd;
+        border-radius: 0;
+        padding: 2rem;
+    }
+    
+    .dv-form label {
+        font-weight: bold;
+        font-size: 0.9rem;
+    }
+    
+    .dv-form .form-control {
+        border: 1px solid #5b616b;
+        border-radius: 0;
+        padding: 0.5rem;
+    }
+    
+    .dv-form .form-control:focus {
+        border-color: #0071bc;
+        box-shadow: 0 0 0 0.2rem rgba(0, 113, 188, 0.25);
+    }
+    
+    .usa-alert {
+        background-color: #e1f3f8;
+        border-left: 4px solid #02bfe7;
+        padding: 1rem;
+        margin-bottom: 1.5rem;
+    }
+    
+    .usa-alert--info {
+        background-color: #e1f3f8;
+        border-left-color: #02bfe7;
+    }
+    
+    .usa-alert--warning {
+        background-color: #fff1d2;
+        border-left-color: #fdb81e;
+    }
+    
+    .usa-alert--error {
+        background-color: #f9dede;
+        border-left-color: #e31c3d;
+    }
+    
+    .usa-alert--success {
+        background-color: #e7f4e4;
+        border-left-color: #2e8540;
+    }
+    
+    .usa-alert__body {
+        padding-left: 1rem;
+    }
+    
+    .usa-alert__heading {
+        margin-top: 0;
+        margin-bottom: 0.5rem;
+        font-size: 1.1rem;
+    }
+    
+    .usa-alert__text {
+        margin-bottom: 0;
+    }
+    
+    fieldset {
+        border: none;
+        margin: 0;
+        padding: 0;
+    }
+    
+    fieldset legend {
+        font-size: 1.2rem;
+        font-weight: bold;
+        margin-bottom: 1rem;
+        color: #112e51;
+    }
+    
+    .form-check-input:checked {
+        background-color: #0071bc;
+        border-color: #0071bc;
+    }
+    
+    .spouse-section, .children-section {
+        display: none;
+        opacity: 0;
+        transition: opacity 0.3s ease-in-out;
+        max-height: 0;
+        overflow: hidden;
+    }
+    
+    .spouse-section.show, .children-section.show {
+        display: block;
+        opacity: 1;
+        max-height: none;
+    }
+    
+    .child-form {
+        background-color: #f8f9fa;
+        border: 1px solid #dee2e6;
+        transition: all 0.3s ease;
+        margin-bottom: 1rem;
+        padding: 1rem;
+        border-radius: 5px;
+    }
+    
+    .child-form:hover {
+        background-color: #e9ecef;
+    }
+    
+    .remove-child {
+        margin-top: 10px;
+    }
+    
+    .add-child-btn {
+        margin-top: 1rem;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <div class="row">
+        <div class="col-lg-10 mx-auto">
+            <div class="text-center mb-5">
+                <img src="{% static 'core/U.S._Department_of_State_official_seal.svg.png' %}" alt="U.S. Department of State" height="60" class="mb-3">
+                <h1 class="mb-3">DV-2027 Program Application</h1>
+                <p class="lead">Complete the form below to apply for the Diversity Visa Program with assistance from DV Portal Ethiopia</p>
+            </div>
+            
+            <div class="card shadow-sm mb-4">
+                <div class="card-header bg-primary text-white">
+                    <h4 class="mb-0">Important Instructions</h4>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h5><i class="fas fa-check-circle text-success me-2"></i>Required Documents</h5>
+                            <ul>
+                                <li>Recent digital photograph (taken within the last 6 months)</li>
+                                <li>Payment proof of 800 Birr to Commercial Bank of Ethiopia</li>
+                                <li>Valid email address and phone number</li>
+                                <li>Spouse and children photos (if applicable)</li>
+                            </ul>
+                        </div>
+                        <div class="col-md-6">
+                            <h5><i class="fas fa-exclamation-triangle text-warning me-2"></i>Photo Requirements</h5>
+                            <ul>
+                                <li>Plain white or off-white background</li>
+                                <li>Full face view directly facing the camera</li>
+                                <li>Neutral facial expression or natural smile</li>
+                                <li>No hats, head coverings, or glasses (unless for religious or medical reasons)</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <form method="post" enctype="multipart/form-data" class="dv-form">
+                {% csrf_token %}
+                
+                <div class="usa-alert usa-alert--info mb-4">
+                    <div class="usa-alert__body">
+                        <h3 class="usa-alert__heading">Important Information</h3>
+                        <p class="usa-alert__text">Please complete all fields marked with * accurately. Incorrect information may result in disqualification.</p>
+                    </div>
+                </div>
+                
+                <fieldset class="mb-4 p-3 border rounded">
+                    <legend>Personal Information</legend>
+                    <div class="row">
+                        <div class="col-md-4">
+                            {{ application_form.first_name|as_crispy_field }}
+                        </div>
+                        <div class="col-md-4">
+                            {{ application_form.middle_name|as_crispy_field }}
+                        </div>
+                        <div class="col-md-4">
+                            {{ application_form.last_name|as_crispy_field }}
+                        </div>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-md-4">
+                            {{ application_form.gender|as_crispy_field }}
+                        </div>
+                        <div class="col-md-4">
+                            {{ application_form.date_of_birth|as_crispy_field }}
+                        </div>
+                        <div class="col-md-4">
+                            {{ application_form.marital_status|as_crispy_field }}
+                            <div class="form-text">
+                                <small class="text-muted">
+                                    <i class="fas fa-info-circle me-1"></i>
+                                    You can apply for yourself only, or include spouse/children if desired.
+                                </small>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-md-4">
+                            {{ application_form.city_of_birth|as_crispy_field }}
+                        </div>
+                        <div class="col-md-4">
+                            {{ application_form.country_of_birth|as_crispy_field }}
+                        </div>
+                        <div class="col-md-4">
+                            {{ application_form.country_of_citizenship|as_crispy_field }}
+                        </div>
+                    </div>
+                </fieldset>
+                
+                <fieldset class="mb-4 p-3 border rounded">
+                    <legend>Contact Information</legend>
+                    <div class="row">
+                        <div class="col-md-6">
+                            {{ application_form.email|as_crispy_field }}
+                        </div>
+                        <div class="col-md-6">
+                            {{ application_form.phone_number|as_crispy_field }}
+                        </div>
+                    </div>
+                    {{ application_form.telegram_username|as_crispy_field }}
+                </fieldset>
+                
+                <fieldset class="mb-4 p-3 border rounded">
+                    <legend>Current Address</legend>
+                    {{ application_form.current_address|as_crispy_field }}
+                    <div class="row">
+                        <div class="col-md-4">
+                            {{ application_form.city|as_crispy_field }}
+                        </div>
+                        <div class="col-md-4">
+                            {{ application_form.state_province|as_crispy_field }}
+                        </div>
+                        <div class="col-md-4">
+                            {{ application_form.postal_code|as_crispy_field }}
+                        </div>
+                    </div>
+                </fieldset>
+                
+                <fieldset class="mb-4 p-3 border rounded">
+                    <legend>Education and Work</legend>
+                    <div class="row">
+                        <div class="col-md-6">
+                            {{ application_form.education_level|as_crispy_field }}
+                        </div>
+                        <div class="col-md-6">
+                            {{ application_form.occupation|as_crispy_field }}
+                        </div>
+                    </div>
+                </fieldset>
+                
+                <!-- Optional Family Members Section -->
+                <fieldset class="mb-4 p-3 border rounded">
+                    <legend><i class="fas fa-users me-2 text-info"></i>Family Members (Optional)</legend>
+                    <div class="alert alert-info">
+                        <p><i class="fas fa-info-circle me-2"></i><strong>Optional:</strong> You can apply for yourself only, or include your spouse and children if you want them to be included in your DV application.</p>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="include-spouse" name="include_spouse">
+                                <label class="form-check-label" for="include-spouse">
+                                    <i class="fas fa-heart me-2 text-danger"></i>Include Spouse Information
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="include-children" name="include_children">
+                                <label class="form-check-label" for="include-children">
+                                    <i class="fas fa-child me-2 text-primary"></i>Include Children Information
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+                
+                <div class="spouse-section" id="spouse-section">
+                    <fieldset class="mb-4 p-3 border rounded">
+                        <legend><i class="fas fa-heart me-2 text-danger"></i>Spouse Information</legend>
+                        <div class="alert alert-success">
+                            <p><i class="fas fa-check-circle me-2"></i><strong>Spouse section is now active!</strong> Please provide information about your spouse.</p>
+                        </div>
+                        
+                        {% crispy spouse_form %}
+                    </fieldset>
+                </div>
+                
+                <div class="children-section" id="children-section">
+                    <fieldset class="mb-4 p-3 border rounded">
+                        <legend><i class="fas fa-child me-2 text-primary"></i>Children Information</legend>
+                        <div class="alert alert-info">
+                            <p><i class="fas fa-info-circle me-2"></i><strong>Children section is now active!</strong> Please provide information about your unmarried children under 21 years of age.</p>
+                        </div>
+                        
+                        <div id="children-forms">
+                            {{ child_formset.management_form }}
+                            {% for form in child_formset %}
+                                <div class="child-form" data-form-index="{{ forloop.counter0 }}" {% if forloop.counter0 > 0 %}style="display: none;"{% endif %}>
+                                    <div class="d-flex justify-content-between align-items-center mb-2">
+                                        <h6 class="mb-0">Child {{ forloop.counter }}</h6>
+                                        {% if not forloop.first %}
+                                            <button type="button" class="btn btn-sm btn-outline-danger remove-child">
+                                                <i class="fas fa-trash me-1"></i>Remove Child
+                                            </button>
+                                        {% endif %}
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            {{ form.first_name|as_crispy_field }}
+                                        </div>
+                                        <div class="col-md-4">
+                                            {{ form.middle_name|as_crispy_field }}
+                                        </div>
+                                        <div class="col-md-4">
+                                            {{ form.last_name|as_crispy_field }}
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            {{ form.gender|as_crispy_field }}
+                                        </div>
+                                        <div class="col-md-4">
+                                            {{ form.date_of_birth|as_crispy_field }}
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            {{ form.city_of_birth|as_crispy_field }}
+                                        </div>
+                                        <div class="col-md-6">
+                                            {{ form.country_of_birth|as_crispy_field }}
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            {{ form.photo|as_crispy_field }}
+                                        </div>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        </div>
+                        
+                        <div class="text-end add-child-btn">
+                            <button type="button" class="btn btn-outline-primary" id="add-child">
+                                <i class="fas fa-plus me-2"></i>Add Another Child
+                            </button>
+                        </div>
+                    </fieldset>
+                </div>
+                
+                <fieldset class="mb-4 p-3 border rounded">
+                    <legend>Required Documents</legend>
+                    <div class="alert alert-warning mb-3">
+                        <p><strong>Photo Requirements:</strong></p>
+                        <ul>
+                            <li>Recent photograph taken within the last 6 months</li>
+                            <li>Plain white or off-white background</li>
+                            <li>Full face view directly facing the camera</li>
+                            <li>Neutral facial expression or natural smile</li>
+                            <li>Both eyes open and clearly visible</li>
+                            <li>No hats, head coverings, or glasses (unless for religious or medical reasons)</li>
+                        </ul>
+                    </div>
+                    {{ application_form.photo|as_crispy_field }}
+                    
+                    <div class="alert alert-warning mb-3">
+                        <p><strong>Payment Requirements:</strong></p>
+                        <ul>
+                            <li>Payment of 800 Birr must be made to <strong>Commercial Bank of Ethiopia (CBE) only</strong></li>
+                            <li>Account Number: <strong>1000674773319</strong></li>
+                            <li>Account Name: <strong>Mr. Esayas Desta</strong></li>
+                            <li>Upload a clear photo or scan of your payment receipt</li>
+                            <li>Ensure the receipt shows the payment date, amount, and your name</li>
+                        </ul>
+                    </div>
+                    {{ application_form.payment_proof|as_crispy_field }}
+                </fieldset>
+                
+                <div class="form-check mb-4">
+                    <input class="form-check-input" type="checkbox" id="terms" name="terms" required>
+                    <label class="form-check-label" for="terms">
+                        I confirm that all information provided is accurate and complete. I understand that any false information may result in disqualification. I agree to the <a href="/terms-of-service/" target="_blank">Terms of Service</a> and <a href="/privacy-policy/" target="_blank">Privacy Policy</a>.
+                    </label>
+                </div>
+                
+                <div class="text-center">
+                    <button type="submit" class="btn btn-primary btn-lg">
+                        <i class="fas fa-paper-plane me-2"></i>Submit Application
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+{% block extra_js %}
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Show/hide spouse and children sections based on checkboxes
+        const includeSpouseCheckbox = document.getElementById('include-spouse');
+        const includeChildrenCheckbox = document.getElementById('include-children');
+        const spouseSection = document.getElementById('spouse-section');
+        const childrenSection = document.getElementById('children-section');
+        
+        function updateSections() {
+            // Show/hide spouse section based on checkbox
+            if (includeSpouseCheckbox.checked) {
+                spouseSection.classList.add('show');
+            } else {
+                spouseSection.classList.remove('show');
+            }
+            
+            // Show/hide children section based on checkbox
+            if (includeChildrenCheckbox.checked) {
+                childrenSection.classList.add('show');
+            } else {
+                childrenSection.classList.remove('show');
+            }
+        }
+        
+        // Initial check
+        updateSections();
+        
+        // Listen for changes
+        includeSpouseCheckbox.addEventListener('change', updateSections);
+        includeChildrenCheckbox.addEventListener('change', updateSections);
+        
+        // Add child button functionality
+        const addChildButton = document.getElementById('add-child');
+        
+        if (addChildButton) {
+            addChildButton.addEventListener('click', function() {
+                // Find the next hidden form
+                const hiddenForms = document.querySelectorAll('.child-form[style*="display: none"]');
+                
+                if (hiddenForms.length > 0) {
+                    // Show the next hidden form
+                    const nextForm = hiddenForms[0];
+                    nextForm.style.display = 'block';
+                    
+                    // Update the total forms count
+                    const totalFormsInput = document.querySelector('[name="children-TOTAL_FORMS"]');
+                    if (totalFormsInput) {
+                        totalFormsInput.value = parseInt(totalFormsInput.value) + 1;
+                    }
+                    
+                    // Add remove button if it doesn't exist
+                    const removeButton = nextForm.querySelector('.remove-child');
+                    if (!removeButton) {
+                        const removeBtn = document.createElement('button');
+                        removeBtn.type = 'button';
+                        removeBtn.className = 'btn btn-sm btn-outline-danger remove-child';
+                        removeBtn.innerHTML = '<i class="fas fa-trash me-1"></i>Remove Child';
+                        
+                        // Insert the remove button in the header
+                        const header = nextForm.querySelector('.d-flex');
+                        if (header) {
+                            header.appendChild(removeBtn);
+                        }
+                    }
+                    
+                    // Clear the form values
+                    const inputs = nextForm.querySelectorAll('input, select, textarea');
+                    inputs.forEach(input => {
+                        if (input.type !== 'hidden') {
+                            input.value = '';
+                        }
+                    });
+                } else {
+                    // Hide the add button if no more forms available
+                    addChildButton.style.display = 'none';
+                }
+            });
+        }
+        
+        // Remove child button functionality
+        document.addEventListener('click', function(e) {
+            if (e.target.classList.contains('remove-child') || e.target.closest('.remove-child')) {
+                const removeBtn = e.target.classList.contains('remove-child') ? e.target : e.target.closest('.remove-child');
+                const childForm = removeBtn.closest('.child-form');
+                
+                if (childForm) {
+                    // Hide the form instead of removing it
+                    childForm.style.display = 'none';
+                    
+                    // Update the total forms count
+                    const totalFormsInput = document.querySelector('[name="children-TOTAL_FORMS"]');
+                    if (totalFormsInput) {
+                        totalFormsInput.value = parseInt(totalFormsInput.value) - 1;
+                    }
+                    
+                    // Clear the form values
+                    const inputs = childForm.querySelectorAll('input, select, textarea');
+                    inputs.forEach(input => {
+                        if (input.type !== 'hidden') {
+                            input.value = '';
+                        }
+                    });
+                    
+                    // Show the add button again
+                    const addChildButton = document.getElementById('add-child');
+                    if (addChildButton) {
+                        addChildButton.style.display = 'inline-block';
+                    }
+                }
+            }
+        });
+    });
+</script>
+{% endblock %}
+{% endblock %}

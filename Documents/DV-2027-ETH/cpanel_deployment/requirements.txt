@@ -1,0 +1,11 @@
+django-crispy-forms
+crispy-bootstrap5
+django-countries
+django-phonenumber-field
+phonenumbers
+python-telegram-bot
+Pillow
+whitenoise
+gunicorn
+python-dotenv
+python-decouple

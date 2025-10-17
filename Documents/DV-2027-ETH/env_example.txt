@@ -1,0 +1,26 @@
+# Django Settings
+SECRET_KEY=django-insecure-your-secret-key-change-in-production
+DEBUG=True
+ALLOWED_HOSTS=localhost,127.0.0.1
+
+# Database (SQLite for development - no additional setup needed)
+# DATABASE_URL=sqlite:///db.sqlite3
+
+# Email Configuration (for development - prints to console)
+EMAIL_HOST=smtp.gmail.com
+EMAIL_PORT=587
+EMAIL_USE_TLS=True
+EMAIL_HOST_USER=your-email@gmail.com
+EMAIL_HOST_PASSWORD=your-app-password
+DEFAULT_FROM_EMAIL=noreply@dvportal.com
+
+# Telegram Bot Configuration (get from @BotFather)
+TELEGRAM_BOT_TOKEN=your-telegram-bot-token-here
+TELEGRAM_ADMIN_CHAT_ID=your-admin-chat-id-here
+
+# Gemini AI API Key (get from Google AI Studio)
+GEMINI_API_KEY=your-gemini-api-key-here
+
+# Payment Gateway (optional for development)
+PAYMENT_API_KEY=your-payment-api-key
+PAYMENT_SECRET_KEY=your-payment-secret-key

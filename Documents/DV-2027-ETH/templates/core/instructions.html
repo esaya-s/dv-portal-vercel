@@ -1,0 +1,234 @@
+{% extends 'base.html' %}
+
+{% block title %}Application Instructions - DV Portal Ethiopia{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <div class="row">
+        <div class="col-lg-10 mx-auto">
+            <h1 class="mb-4">DV Application Instructions</h1>
+            
+            <div class="alert alert-info">
+                <h5><i class="fas fa-info-circle me-2"></i>Important Notice</h5>
+                <p class="mb-0">
+                    Follow these instructions carefully to ensure your DV application is processed correctly.
+                </p>
+            </div>
+            
+            <div class="card mb-4">
+                <div class="card-header bg-primary text-white">
+                    <h4 class="mb-0">Required Documents</h4>
+                </div>
+                <div class="card-body">
+                    <ul class="list-group list-group-flush">
+                        {% for doc in required_documents %}
+                        <li class="list-group-item">
+                            <i class="fas fa-file-alt me-2 text-primary"></i> {{ doc }}
+                        </li>
+                        {% empty %}
+                        <li class="list-group-item">
+                            <i class="fas fa-file-alt me-2 text-primary"></i> Valid passport or national ID
+                        </li>
+                        <li class="list-group-item">
+                            <i class="fas fa-file-alt me-2 text-primary"></i> Recent passport-style photo (white background)
+                        </li>
+                        <li class="list-group-item">
+                            <i class="fas fa-file-alt me-2 text-primary"></i> Marriage certificate (if married)
+                        </li>
+                        <li class="list-group-item">
+                            <i class="fas fa-file-alt me-2 text-primary"></i> Birth certificates for spouse and children
+                        </li>
+                        <li class="list-group-item">
+                            <i class="fas fa-file-alt me-2 text-primary"></i> Educational certificates
+                        </li>
+                        <li class="list-group-item">
+                            <i class="fas fa-file-alt me-2 text-primary"></i> Payment proof (800 ETB)
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="card mb-4">
+                <div class="card-header bg-primary text-white">
+                    <h4 class="mb-0">Application Steps</h4>
+                </div>
+                <div class="card-body">
+                    <div class="timeline">
+                        {% for step in application_steps %}
+                        <div class="mb-4">
+                            <div class="d-flex">
+                                <div class="flex-shrink-0">
+                                    <div class="bg-primary text-white rounded-circle d-flex align-items-center justify-content-center" style="width: 40px; height: 40px;">
+                                        <span>{{ forloop.counter }}</span>
+                                    </div>
+                                </div>
+                                <div class="flex-grow-1 ms-3">
+                                    <h5>{{ step }}</h5>
+                                </div>
+                            </div>
+                        </div>
+                        {% empty %}
+                        <div class="mb-4">
+                            <div class="d-flex">
+                                <div class="flex-shrink-0">
+                                    <div class="bg-primary text-white rounded-circle d-flex align-items-center justify-content-center" style="width: 40px; height: 40px;">
+                                        <span>1</span>
+                                    </div>
+                                </div>
+                                <div class="flex-grow-1 ms-3">
+                                    <h5>Create your account and complete profile</h5>
+                                    <p class="text-muted">Register on our platform and fill in all required personal information.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mb-4">
+                            <div class="d-flex">
+                                <div class="flex-shrink-0">
+                                    <div class="bg-primary text-white rounded-circle d-flex align-items-center justify-content-center" style="width: 40px; height: 40px;">
+                                        <span>2</span>
+                                    </div>
+                                </div>
+                                <div class="flex-grow-1 ms-3">
+                                    <h5>Make payment of 800 ETB to Commercial Bank of Ethiopia</h5>
+                                    <p class="text-muted">Transfer the fee to our CBE account and take a screenshot/photo of your receipt.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mb-4">
+                            <div class="d-flex">
+                                <div class="flex-shrink-0">
+                                    <div class="bg-primary text-white rounded-circle d-flex align-items-center justify-content-center" style="width: 40px; height: 40px;">
+                                        <span>3</span>
+                                    </div>
+                                </div>
+                                <div class="flex-grow-1 ms-3">
+                                    <h5>Fill out complete DV application form</h5>
+                                    <p class="text-muted">Answer all questions accurately and completely.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mb-4">
+                            <div class="d-flex">
+                                <div class="flex-shrink-0">
+                                    <div class="bg-primary text-white rounded-circle d-flex align-items-center justify-content-center" style="width: 40px; height: 40px;">
+                                        <span>4</span>
+                                    </div>
+                                </div>
+                                <div class="flex-grow-1 ms-3">
+                                    <h5>Upload required photos and documents</h5>
+                                    <p class="text-muted">Our AI system will validate your photo against US requirements.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mb-4">
+                            <div class="d-flex">
+                                <div class="flex-shrink-0">
+                                    <div class="bg-primary text-white rounded-circle d-flex align-items-center justify-content-center" style="width: 40px; height: 40px;">
+                                        <span>5</span>
+                                    </div>
+                                </div>
+                                <div class="flex-grow-1 ms-3">
+                                    <h5>Review and submit application</h5>
+                                    <p class="text-muted">Carefully check all information before final submission.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mb-4">
+                            <div class="d-flex">
+                                <div class="flex-shrink-0">
+                                    <div class="bg-success text-white rounded-circle d-flex align-items-center justify-content-center" style="width: 40px; height: 40px;">
+                                        <span>6</span>
+                                    </div>
+                                </div>
+                                <div class="flex-grow-1 ms-3">
+                                    <h5>Receive confirmation and track status</h5>
+                                    <p class="text-muted">Get updates via Telegram and our online portal.</p>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+            
+            <div class="card mb-4">
+                <div class="card-header bg-primary text-white">
+                    <h4 class="mb-0">Payment Instructions</h4>
+                </div>
+                <div class="card-body">
+                    <div class="alert alert-warning">
+                        <h5><i class="fas fa-exclamation-triangle me-2"></i>Payment Method</h5>
+                        <p class="mb-0">
+                            <strong>Commercial Bank of Ethiopia (CBE) ONLY</strong>
+                        </p>
+                    </div>
+                    
+                    <h5>Bank Transfer Details:</h5>
+                    <ul>
+                        <li><strong>Bank:</strong> Commercial Bank of Ethiopia</li>
+                        <li><strong>Account Name:</strong> MR. Esayas Desta</li>
+                        <li><strong>Account Number:</strong> 1000674773319</li>
+                        <li><strong>Branch:</strong> Addis Ababa Branch</li>
+                        <li><strong>Amount:</strong> 800 ETB</li>
+                        <li><strong>Reference:</strong> Your Full Name </li>
+                    </ul>
+                    
+                    <h5>After Payment:</h5>
+                    <ol>
+                        <li>Take a clear photo or screenshot of your payment receipt</li>
+                        <li>Upload the proof when submitting your application</li>
+                        <li>Keep the original receipt for your records</li>
+                    </ol>
+                </div>
+            </div>
+            
+            <div class="card">
+                <div class="card-header bg-primary text-white">
+                    <h4 class="mb-0">Photo Requirements</h4>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h5>Technical Requirements:</h5>
+                            <ul>
+                                <li><strong>Background:</strong> Pure white only</li>
+                                <li><strong>Format:</strong> Square (1:1 ratio)</li>
+                                <li><strong>Size:</strong> 600x600 pixels minimum</li>
+                                <li><strong>File type:</strong> JPEG (.jpg)</li>
+                                <li><strong>File size:</strong> Less than 240 KB</li>
+                                <li><strong>Recent:</strong> Taken within last 6 months</li>
+                            </ul>
+                        </div>
+                        <div class="col-md-6">
+                            <h5>Appearance Requirements:</h5>
+                            <ul>
+                                <li><strong>Head position:</strong> Directly facing camera</li>
+                                <li><strong>Expression:</strong> Neutral, mouth closed</li>
+                                <li><strong>Eyes:</strong> Open and clearly visible</li>
+                                <li><strong>Glasses:</strong> No glare, eyes fully visible</li>
+                                <li><strong>Head coverings:</strong> Not allowed (except religious)</li>
+                                <li><strong>Editing:</strong> No filters or alterations</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="alert alert-info mt-3">
+                        <p class="mb-0">
+                            <i class="fas fa-robot me-2"></i>
+                            <strong>Our AI system will automatically validate your photo</strong> against US DV requirements and provide immediate feedback if changes are needed.
+                        </p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="text-center mt-5">
+                <a href="#" onclick="alert('Registration coming soon! This is a demo of the beautiful styling.')" class="btn btn-primary btn-lg">
+                    <i class="fas fa-rocket me-2"></i>
+                    Start Your Application
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

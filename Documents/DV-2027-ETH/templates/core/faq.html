@@ -1,0 +1,325 @@
+{% extends 'base.html' %}
+
+{% block title %}Frequently Asked Questions - DV Portal Ethiopia{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <div class="row">
+        <div class="col-lg-10 mx-auto">
+            <h1 class="mb-4">Frequently Asked Questions</h1>
+            
+            <div class="alert alert-info mb-4">
+                <h5><i class="fas fa-info-circle me-2"></i>DV Portal Ethiopia FAQ</h5>
+                <p class="mb-0">
+                    Find answers to common questions about our DV application assistance service.
+                </p>
+            </div>
+            
+            <!-- FAQ Categories -->
+            <ul class="nav nav-pills mb-4" id="faqTabs" role="tablist">
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link active" id="general-tab" data-bs-toggle="pill" data-bs-target="#general" type="button" role="tab">
+                        General
+                    </button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="application-tab" data-bs-toggle="pill" data-bs-target="#application" type="button" role="tab">
+                        Application Process
+                    </button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="payment-tab" data-bs-toggle="pill" data-bs-target="#payment" type="button" role="tab">
+                        Payment
+                    </button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="eligibility-tab" data-bs-toggle="pill" data-bs-target="#eligibility" type="button" role="tab">
+                        Eligibility
+                    </button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="technical-tab" data-bs-toggle="pill" data-bs-target="#technical" type="button" role="tab">
+                        Technical Support
+                    </button>
+                </li>
+            </ul>
+            
+            <!-- FAQ Content -->
+            <div class="tab-content" id="faqTabsContent">
+                <!-- General FAQs -->
+                <div class="tab-pane fade show active" id="general" role="tabpanel">
+                    <div class="accordion" id="accordionGeneral">
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="headingGeneral1">
+                                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseGeneral1">
+                                    What is DV Portal Ethiopia?
+                                </button>
+                            </h2>
+                            <div id="collapseGeneral1" class="accordion-collapse collapse show" data-bs-parent="#accordionGeneral">
+                                <div class="accordion-body">
+                                    DV Portal Ethiopia is a professional service that assists Ethiopian citizens with their US Diversity Visa (Green Card Lottery) applications. We help ensure your application meets all requirements and is submitted correctly.
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="headingGeneral2">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseGeneral2">
+                                    Are you affiliated with the US government?
+                                </button>
+                            </h2>
+                            <div id="collapseGeneral2" class="accordion-collapse collapse" data-bs-parent="#accordionGeneral">
+                                <div class="accordion-body">
+                                    No, we are an independent service provider and are not affiliated with, endorsed by, or sponsored by the US Department of State or the US Government. We provide assistance services for Ethiopian citizens applying to the official US Diversity Visa Program.
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="headingGeneral3">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseGeneral3">
+                                    How do I contact your support team?
+                                </button>
+                            </h2>
+                            <div id="collapseGeneral3" class="accordion-collapse collapse" data-bs-parent="#accordionGeneral">
+                                <div class="accordion-body">
+                                    You can contact our support team via:
+                                    <ul>
+                                        <li>Email: support@dvportal-ethiopia.com</li>
+                                        <li>Telegram: @anvilutech</li>
+                                        <li>Phone: +251-911-XXXXXX</li>
+                                        <li>Contact form on our website</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Application Process FAQs -->
+                <div class="tab-pane fade" id="application" role="tabpanel">
+                    <div class="accordion" id="accordionApplication">
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="headingApp1">
+                                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseApp1">
+                                    How long does the process take?
+                                </button>
+                            </h2>
+                            <div id="collapseApp1" class="accordion-collapse collapse show" data-bs-parent="#accordionApplication">
+                                <div class="accordion-body">
+                                    Once payment is verified, we typically process applications within 2-3 business days. The entire DV registration period is usually from October to November each year.
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="headingApp2">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseApp2">
+                                    How will I know if my application is submitted?
+                                </button>
+                            </h2>
+                            <div id="collapseApp2" class="accordion-collapse collapse" data-bs-parent="#accordionApplication">
+                                <div class="accordion-body">
+                                    You will receive a confirmation notification via:
+                                    <ul>
+                                        <li>Telegram message (if you've set up Telegram notifications)</li>
+                                        <li>Email confirmation</li>
+                                        <li>Status update in your online dashboard</li>
+                                    </ul>
+                                    Each application receives a unique confirmation number in the format DV2027-XXXXXXXXXXX.
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="headingApp3">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseApp3">
+                                    Can I edit my application after submission?
+                                </button>
+                            </h2>
+                            <div id="collapseApp3" class="accordion-collapse collapse" data-bs-parent="#accordionApplication">
+                                <div class="accordion-body">
+                                    You can edit your application only if it's in "Draft" or "Payment Pending" status. Once your application has been reviewed and submitted to the US DV system, no further edits are possible.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Payment FAQs -->
+                <div class="tab-pane fade" id="payment" role="tabpanel">
+                    <div class="accordion" id="accordionPayment">
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="headingPayment1">
+                                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapsePayment1">
+                                    Why do I need to pay 800 ETB?
+                                </button>
+                            </h2>
+                            <div id="collapsePayment1" class="accordion-collapse collapse show" data-bs-parent="#accordionPayment">
+                                <div class="accordion-body">
+                                    The 800 ETB fee covers our professional services including application review, AI-powered validation, photo verification, application submission, and ongoing support. This is NOT a payment to the US government.
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="headingPayment2">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapsePayment2">
+                                    What payment methods do you accept?
+                                </button>
+                            </h2>
+                            <div id="collapsePayment2" class="accordion-collapse collapse" data-bs-parent="#accordionPayment">
+                                <div class="accordion-body">
+                                    We currently accept payments only through Commercial Bank of Ethiopia (CBE). After making your payment, you'll need to upload proof of payment (receipt or screenshot) with your application.
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="headingPayment3">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapsePayment3">
+                                    Is the payment refundable?
+                                </button>
+                            </h2>
+                            <div id="collapsePayment3" class="accordion-collapse collapse" data-bs-parent="#accordionPayment">
+                                <div class="accordion-body">
+                                    Refunds are provided only in the following circumstances:
+                                    <ul>
+                                        <li>Technical failure on our part preventing application submission</li>
+                                        <li>Duplicate payment errors</li>
+                                        <li>Service cancellation by us before processing begins</li>
+                                    </ul>
+                                    No refunds will be provided for change of mind, incorrect information provided by you, or non-selection in the DV lottery.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Eligibility FAQs -->
+                <div class="tab-pane fade" id="eligibility" role="tabpanel">
+                    <div class="accordion" id="accordionEligibility">
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="headingEligibility1">
+                                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseEligibility1">
+                                    Who is eligible for the DV program?
+                                </button>
+                            </h2>
+                            <div id="collapseEligibility1" class="accordion-collapse collapse show" data-bs-parent="#accordionEligibility">
+                                <div class="accordion-body">
+                                    Ethiopian citizens and those born in Ethiopia are eligible. You must have a high school education or equivalent, OR two years of work experience in a job requiring training. You must also meet other US immigration requirements.
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="headingEligibility2">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseEligibility2">
+                                    What education level is required?
+                                </button>
+                            </h2>
+                            <div id="collapseEligibility2" class="accordion-collapse collapse" data-bs-parent="#accordionEligibility">
+                                <div class="accordion-body">
+                                    You must have either:
+                                    <ul>
+                                        <li>A high school education or equivalent (12 years of formal education), OR</li>
+                                        <li>Two years of work experience within the past five years in an occupation requiring at least two years of training or experience</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="headingEligibility3">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseEligibility3">
+                                    Can I include my family in my application?
+                                </button>
+                            </h2>
+                            <div id="collapseEligibility3" class="accordion-collapse collapse" data-bs-parent="#accordionEligibility">
+                                <div class="accordion-body">
+                                    Yes, you must include your spouse and all unmarried children under 21 years of age in your application, whether they are living with you or not, and whether they will immigrate with you or not. Failure to list all eligible family members can result in disqualification.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Technical Support FAQs -->
+                <div class="tab-pane fade" id="technical" role="tabpanel">
+                    <div class="accordion" id="accordionTechnical">
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="headingTechnical1">
+                                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTechnical1">
+                                    What photo requirements must I meet?
+                                </button>
+                            </h2>
+                            <div id="collapseTechnical1" class="accordion-collapse collapse show" data-bs-parent="#accordionTechnical">
+                                <div class="accordion-body">
+                                    Photos must have a white background, show your full face looking directly at camera, be recent (within 6 months), and meet specific size and quality requirements. Our AI system will validate your photo before submission.
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="headingTechnical2">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTechnical2">
+                                    How do I set up Telegram notifications?
+                                </button>
+                            </h2>
+                            <div id="collapseTechnical2" class="accordion-collapse collapse" data-bs-parent="#accordionTechnical">
+                                <div class="accordion-body">
+                                    To set up Telegram notifications:
+                                    <ol>
+                                        <li>Install Telegram app on your phone</li>
+                                        <li>Search for our bot: @DVPortalEthiopiaBot</li>
+                                        <li>Start a chat and click "Start"</li>
+                                        <li>Use the /verify command with your phone number to link your account</li>
+                                    </ol>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="headingTechnical3">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTechnical3">
+                                    What file formats do you accept for document uploads?
+                                </button>
+                            </h2>
+                            <div id="collapseTechnical3" class="accordion-collapse collapse" data-bs-parent="#accordionTechnical">
+                                <div class="accordion-body">
+                                    We accept the following file formats:
+                                    <ul>
+                                        <li>Photos: JPEG (.jpg) format only</li>
+                                        <li>Documents: PDF, JPG, or PNG</li>
+                                        <li>Payment proof: JPG, PNG, or PDF</li>
+                                    </ul>
+                                    Maximum file size is 5MB per file.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="text-center mt-5">
+                <p class="mb-4">Still have questions? Contact our support team for assistance.</p>
+                <a href="{% url 'core:contact' %}" class="btn btn-primary btn-lg">
+                    <i class="fas fa-envelope me-2"></i>
+                    Contact Support
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    // Activate the first tab when the page loads
+    document.addEventListener('DOMContentLoaded', function() {
+        var firstTabEl = document.querySelector('#faqTabs button[data-bs-toggle="pill"]');
+        var firstTab = new bootstrap.Tab(firstTabEl);
+        firstTab.show();
+    });
+</script>
+{% endblock %}

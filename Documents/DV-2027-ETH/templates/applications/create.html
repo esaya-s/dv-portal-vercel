@@ -1,0 +1,134 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block title %}Apply for DV-2027 Program - DV Portal Ethiopia{% endblock %}
+
+{% block extra_css %}
+<style>
+    /* Styles to match the official DV website */
+    .dv-form {
+        background-color: #fff;
+        border: 1px solid #ddd;
+        border-radius: 0;
+        padding: 2rem;
+    }
+    
+    .dv-form label {
+        font-weight: bold;
+        font-size: 0.9rem;
+    }
+    
+    .dv-form .form-control {
+        border: 1px solid #5b616b;
+        border-radius: 0;
+        padding: 0.5rem;
+    }
+    
+    .dv-form .form-control:focus {
+        border-color: #0071bc;
+        box-shadow: 0 0 0 0.2rem rgba(0, 113, 188, 0.25);
+    }
+    
+    .usa-alert {
+        background-color: #e1f3f8;
+        border-left: 4px solid #02bfe7;
+        padding: 1rem;
+        margin-bottom: 1.5rem;
+    }
+    
+    .usa-alert--info {
+        background-color: #e1f3f8;
+        border-left-color: #02bfe7;
+    }
+    
+    .usa-alert--warning {
+        background-color: #fff1d2;
+        border-left-color: #fdb81e;
+    }
+    
+    .usa-alert--error {
+        background-color: #f9dede;
+        border-left-color: #e31c3d;
+    }
+    
+    .usa-alert--success {
+        background-color: #e7f4e4;
+        border-left-color: #2e8540;
+    }
+    
+    .usa-alert__body {
+        padding-left: 1rem;
+    }
+    
+    .usa-alert__heading {
+        margin-top: 0;
+        margin-bottom: 0.5rem;
+        font-size: 1.1rem;
+    }
+    
+    .usa-alert__text {
+        margin-bottom: 0;
+    }
+    
+    fieldset {
+        border: none;
+        margin: 0;
+        padding: 0;
+    }
+    
+    fieldset legend {
+        font-size: 1.2rem;
+        font-weight: bold;
+        margin-bottom: 1rem;
+        color: #112e51;
+    }
+    
+    .form-check-input:checked {
+        background-color: #0071bc;
+        border-color: #0071bc;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <div class="row">
+        <div class="col-lg-10 mx-auto">
+            <div class="text-center mb-5">
+                <img src="https://travel.state.gov/etc/designs/travel/images/state-seal-white.svg" alt="U.S. Department of State" height="60" class="mb-3">
+                <h1 class="mb-3">DV-2027 Program Application</h1>
+                <p class="lead">Complete the form below to apply for the Diversity Visa Program with assistance from DV Portal Ethiopia</p>
+            </div>
+            
+            <div class="card shadow-sm mb-4">
+                <div class="card-header bg-primary text-white">
+                    <h4 class="mb-0">Important Instructions</h4>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h5><i class="fas fa-check-circle text-success me-2"></i>Required Documents</h5>
+                            <ul>
+                                <li>Recent digital photograph (taken within the last 6 months)</li>
+                                <li>Payment proof of 800 Birr to Commercial Bank of Ethiopia</li>
+                                <li>Valid email address and phone number</li>
+                            </ul>
+                        </div>
+                        <div class="col-md-6">
+                            <h5><i class="fas fa-exclamation-triangle text-warning me-2"></i>Photo Requirements</h5>
+                            <ul>
+                                <li>Plain white or off-white background</li>
+                                <li>Full face view directly facing the camera</li>
+                                <li>Neutral facial expression or natural smile</li>
+                                <li>No hats, head coverings, or glasses (unless for religious or medical reasons)</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            {% crispy form %}
+        </div>
+    </div>
+</div>
+{% endblock %}

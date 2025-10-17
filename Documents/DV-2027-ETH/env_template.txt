@@ -1,0 +1,41 @@
+# Environment Variables Template for cPanel
+# Copy these variables to your cPanel Environment Variables section
+
+# Django Settings
+SECRET_KEY=your-super-secret-key-change-this-in-production
+DEBUG=False
+ALLOWED_HOSTS=yourdomain.com,www.yourdomain.com
+
+# Database Configuration
+DB_NAME=your_database_name
+DB_USER=your_database_user
+DB_PASSWORD=your_database_password
+DB_HOST=localhost
+DB_PORT=3306
+
+# Telegram Bot Configuration
+TELEGRAM_BOT_TOKEN=1234567890:ABCdefGHIjklMNOpqrsTUVwxyz
+TELEGRAM_ADMIN_USERNAME=anvilutech
+TELEGRAM_BOT_NAME=DV2027
+TELEGRAM_BOT_USERNAME=dv20272etbot
+TELEGRAM_ADMIN_CHAT_ID=123456789
+
+# Site Configuration
+SITE_URL=https://yourdomain.com
+
+# AI Configuration (Optional)
+GEMINI_API_KEY=your-gemini-api-key-here
+
+# Email Configuration (Optional)
+EMAIL_HOST=smtp.yourdomain.com
+EMAIL_PORT=587
+EMAIL_HOST_USER=noreply@yourdomain.com
+EMAIL_HOST_PASSWORD=your-email-password
+DEFAULT_FROM_EMAIL=noreply@yourdomain.com
+
+# Instructions:
+# 1. Go to cPanel → Environment Variables
+# 2. Add each variable above with its corresponding value
+# 3. Replace placeholder values with your actual credentials
+# 4. Save the environment variables
+# 5. Restart your Python application

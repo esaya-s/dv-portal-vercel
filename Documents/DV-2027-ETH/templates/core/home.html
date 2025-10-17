@@ -1,0 +1,636 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}DV Portal Ethiopia - Official DV-2027 Program Assistance{% endblock %}
+
+{% block extra_css %}
+<style>
+    /* USA Government Website Styling */
+    .usa-hero {
+        background: linear-gradient(135deg, #112e51 0%, #205493 100%);
+        color: white;
+        padding: 4rem 0;
+        border-bottom: 3px solid #02bfe7;
+    }
+    
+    .usa-hero h1 {
+        font-size: 2.5rem;
+        font-weight: 700;
+        margin-bottom: 1.5rem;
+        text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+    }
+    
+    .usa-hero h2 {
+        font-size: 1.2rem;
+        font-weight: 500;
+        margin-bottom: 1.5rem;
+        opacity: 0.95;
+        text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+    }
+    
+    .usa-hero .lead {
+        font-size: 1.2rem;
+        margin-bottom: 2rem;
+        opacity: 0.95;
+        text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+    }
+    
+    .usa-section {
+        padding: 3rem 0;
+        border-bottom: 1px solid #d6d7d9;
+    }
+    
+    .usa-section:last-child {
+        border-bottom: none;
+    }
+    
+    .usa-card {
+        background: white;
+        border: 1px solid #d6d7d9;
+        border-radius: 0;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        transition: box-shadow 0.3s ease;
+    }
+    
+    .usa-card:hover {
+        box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+    }
+    
+    .usa-card-header {
+        background: #f1f1f1;
+        border-bottom: 1px solid #d6d7d9;
+        padding: 1rem 1.5rem;
+        font-weight: 600;
+        color: #112e51;
+    }
+    
+    .usa-card-body {
+        padding: 1.5rem;
+    }
+    
+    .usa-button {
+        background-color: #0071bc;
+        border-color: #0071bc;
+        color: white;
+        font-weight: 600;
+        padding: 0.75rem 1.5rem;
+        border-radius: 3px;
+        text-decoration: none;
+        display: inline-block;
+        transition: background-color 0.3s ease;
+    }
+    
+    .usa-button:hover {
+        background-color: #005691;
+        border-color: #005691;
+        color: white;
+    }
+    
+    .usa-button-secondary {
+        background-color: #5b616b;
+        border-color: #5b616b;
+    }
+    
+    .usa-button-secondary:hover {
+        background-color: #323a45;
+        border-color: #323a45;
+    }
+    
+    .usa-alert {
+        border-left: 4px solid #02bfe7;
+        background-color: #e0f7fa;
+        padding: 1rem 1.5rem;
+        margin: 1rem 0;
+        border-radius: 0;
+        color: #112e51;
+    }
+    
+    .usa-alert h5 {
+        color: #112e51;
+        font-weight: 700;
+    }
+    
+    .usa-alert p {
+        color: #323a45;
+        margin-bottom: 0.5rem;
+    }
+    
+    .usa-alert strong {
+        color: #112e51;
+    }
+    
+    .usa-alert-warning {
+        border-left-color: #fdb81e;
+        background-color: #fffde7;
+    }
+    
+    .usa-alert-success {
+        border-left-color: #2e8540;
+        background-color: #e8f5e9;
+    }
+    
+    .usa-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 2rem;
+        margin: 2rem 0;
+    }
+    
+    .usa-feature {
+        text-align: center;
+        padding: 2rem 1rem;
+    }
+    
+    .usa-feature i {
+        font-size: 3rem;
+        color: #0071bc;
+        margin-bottom: 1rem;
+    }
+    
+    .usa-feature h3 {
+        color: #112e51;
+        font-weight: 600;
+        margin-bottom: 1rem;
+    }
+    
+    .usa-stats {
+        background: #f1f1f1;
+        padding: 2rem 0;
+        text-align: center;
+    }
+    
+    .usa-stat-item {
+        display: inline-block;
+        margin: 0 2rem;
+        text-align: center;
+    }
+    
+    .usa-stat-number {
+        font-size: 2.5rem;
+        font-weight: 700;
+        color: #0071bc;
+        display: block;
+    }
+    
+    .usa-stat-label {
+        font-size: 0.9rem;
+        color: #5b616b;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+    }
+    
+    .usa-footer-info {
+        background: #f1f1f1;
+        padding: 2rem 0;
+        border-top: 1px solid #d6d7d9;
+    }
+    
+    .usa-process-step {
+        display: flex;
+        align-items: center;
+        margin: 1.5rem 0;
+        padding: 1rem;
+        background: white;
+        border: 1px solid #d6d7d9;
+    }
+    
+    .usa-step-number {
+        background: #0071bc;
+        color: white;
+        width: 3rem;
+        height: 3rem;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 700;
+        margin-right: 1rem;
+        flex-shrink: 0;
+    }
+    
+    .usa-step-content h4 {
+        color: #112e51;
+        margin-bottom: 0.5rem;
+    }
+    
+    .usa-step-content p {
+        color: #5b616b;
+        margin: 0;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<!-- USA Government Style Hero Section -->
+<section class="usa-hero">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-10 text-center">
+                <div class="mb-4">
+                    <img src="{% static 'core/U.S._Department_of_State_official_seal.svg.png' %}" alt="U.S. Department of State" height="80" class="mb-3">
+                </div>
+                <h1>🇺🇸 Diversity Visa Program 2027</h1>
+                <h2 class="h4 text-light mb-4">Official Application Assistance for Ethiopian Citizens</h2>
+                <p class="lead mb-4">
+                    <strong>Professional guidance</strong> to maximize your chances of success in the United States Diversity Visa Program.
+                    Join <strong>984 successful applicants</strong> who achieved their American Dream with our expert assistance.
+                </p>
+                
+                <div class="row justify-content-center mb-4">
+                    <div class="col-md-10">
+                        <div class="usa-alert">
+                            <div class="row align-items-center">
+                                <div class="col-md-8">
+                                    <h5 class="mb-2 text-dark"><i class="fas fa-star me-2 text-warning"></i>Why Choose DV Portal Ethiopia?</h5>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <p class="mb-1 text-dark"><i class="fas fa-check text-success me-2"></i><strong>67.5% Success Rate</strong></p>
+                                            <p class="mb-1 text-dark"><i class="fas fa-check text-success me-2"></i><strong>AI-Powered Validation</strong></p>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <p class="mb-1 text-dark"><i class="fas fa-check text-success me-2"></i><strong>24/7 Support</strong></p>
+                                            <p class="mb-1 text-dark"><i class="fas fa-check text-success me-2"></i><strong>Professional Guidance</strong></p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 text-center">
+                                    <div class="bg-white rounded p-3">
+                                        <h4 class="text-primary mb-1">984</h4>
+                                        <small class="text-muted">Successful Applicants</small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="d-flex gap-3 justify-content-center flex-wrap">
+                    {% if user.is_authenticated %}
+                    <a href="{% url 'core:dashboard' %}" class="usa-button btn-lg">
+                        <i class="fas fa-tachometer-alt me-2"></i>
+                        My Dashboard
+                    </a>
+                    <a href="{% url 'applications:create' %}" class="usa-button btn-lg">
+                        <i class="fas fa-plus me-2"></i>
+                        New Application
+                    </a>
+                    {% else %}
+                    <a href="/applications/status/" class="usa-button btn-lg">
+                        <i class="fas fa-search me-2"></i>
+                        Check Application Status
+                    </a>
+                    <a href="{% url 'core:eligibility' %}" class="usa-button usa-button-secondary btn-lg">
+                        <i class="fas fa-check-circle me-2"></i>
+                        Check Eligibility
+                    </a>
+                    {% endif %}
+                </div>
+                
+                <div class="mt-4">
+                    <p class="text-light">
+                        <i class="fas fa-shield-alt me-2"></i>
+                        <strong>Secure & Confidential</strong> • 
+                        <i class="fas fa-clock me-2"></i>
+                        <strong>24/7 Support</strong> • 
+                        <i class="fas fa-users me-2"></i>
+                        <strong>Expert Team</strong>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Important Notice -->
+<section class="usa-section">
+    <div class="container">
+        <div class="usa-alert usa-alert-warning">
+            <h4><i class="fas fa-exclamation-triangle me-2"></i>Important Notice</h4>
+            <p><strong>DV-2027 Registration Period:</strong> October 2025 - November 2025 (Dates to be confirmed by US Department of State)</p>
+            <p><strong>Application Fee:</strong> 800 ETB deposit required to Commercial Bank of Ethiopia (CBE) Account: 1000674773319</p>
+        </div>
+    </div>
+</section>
+
+<!-- Program Overview -->
+<section class="usa-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8">
+                <h2>About the Diversity Visa Program</h2>
+                <p class="lead">
+                    The Diversity Visa (DV) Program is a United States government program that provides 
+                    up to 55,000 immigrant visas annually to people from countries with low rates of 
+                    immigration to the United States.
+                </p>
+                
+                <div class="usa-grid">
+                    <div class="usa-feature">
+                        <i class="fas fa-globe-americas"></i>
+                        <h3>Global Opportunity</h3>
+                        <p>Open to citizens of countries with low immigration rates to the United States</p>
+                    </div>
+                    <div class="usa-feature">
+                        <i class="fas fa-graduation-cap"></i>
+                        <h3>Education Requirements</h3>
+                        <p>High school education or equivalent work experience required</p>
+                    </div>
+                    <div class="usa-feature">
+                        <i class="fas fa-users"></i>
+                        <h3>Family Inclusion</h3>
+                        <p>Include spouse and unmarried children under 21 in your application</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-lg-4">
+                <div class="usa-card">
+                    <div class="usa-card-header">
+                        <h4>Quick Facts</h4>
+                    </div>
+                    <div class="usa-card-body">
+                        <ul class="list-unstyled">
+                            <li><strong>Program Year:</strong> DV-2027</li>
+                            <li><strong>Total Visas:</strong> Up to 55,000</li>
+                            <li><strong>Registration Period:</strong> Oct-Nov 2025</li>
+                            <li><strong>Selection Method:</strong> Random Computer Drawing</li>
+                            <li><strong>Application Fee:</strong> 800 ETB</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Application Process -->
+<section class="usa-section">
+    <div class="container">
+        <h2 class="text-center mb-5">How to Apply</h2>
+        <div class="row">
+            <div class="col-lg-8 mx-auto">
+                <div class="usa-process-step">
+                    <div class="usa-step-number">1</div>
+                    <div class="usa-step-content">
+                        <h4>Check Eligibility</h4>
+                        <p>Verify you meet the education and country requirements for the DV program</p>
+                    </div>
+                </div>
+                
+                <div class="usa-process-step">
+                    <div class="usa-step-number">2</div>
+                    <div class="usa-step-content">
+                        <h4>Make Payment</h4>
+                        <p>Deposit 800 ETB to CBE Account: 1000674773319 (Mr. Esayas Desta)</p>
+                    </div>
+                </div>
+                
+                <div class="usa-process-step">
+                    <div class="usa-step-number">3</div>
+                    <div class="usa-step-content">
+                        <h4>Complete Application</h4>
+                        <p>Fill out the DV application form with accurate information and required documents</p>
+                    </div>
+                </div>
+                
+                <div class="usa-process-step">
+                    <div class="usa-step-number">4</div>
+                    <div class="usa-step-content">
+                        <h4>Submit & Wait</h4>
+                        <p>Submit your application and wait for the random selection results</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Statistics -->
+<section class="usa-stats">
+    <div class="container">
+        <h3 class="text-center mb-4">DV-2026 Program Results</h3>
+        <div class="usa-stat-item">
+            <span class="usa-stat-number">2,847</span>
+            <span class="usa-stat-label">Total Applications</span>
+        </div>
+        <div class="usa-stat-item">
+            <span class="usa-stat-number">984</span>
+            <span class="usa-stat-label">Successfully Approved</span>
+        </div>
+        <div class="usa-stat-item">
+            <span class="usa-stat-number">67.5%</span>
+            <span class="usa-stat-label">Success Rate</span>
+        </div>
+        <div class="usa-stat-item">
+            <span class="usa-stat-number">2026</span>
+            <span class="usa-stat-label">Last DV Year</span>
+        </div>
+    </div>
+</section>
+
+<!-- Success Stories -->
+<section class="usa-section">
+    <div class="container">
+        <h2 class="text-center mb-5">Recent Success Stories</h2>
+        <div class="row">
+            <div class="col-md-4 mb-4">
+                <div class="usa-card">
+                    <div class="usa-card-header">
+                        <h5><i class="fas fa-user-graduate me-2"></i>Sarah M.</h5>
+                        <small class="text-muted">Addis Ababa, Ethiopia</small>
+                    </div>
+                    <div class="usa-card-body">
+                        <p>"Thanks to DV Portal Ethiopia, I successfully applied for DV-2026 and was selected! The professional guidance and AI validation made all the difference."</p>
+                        <div class="usa-alert usa-alert-success">
+                            <i class="fas fa-check-circle me-2"></i>Selected for DV-2026
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-md-4 mb-4">
+                <div class="usa-card">
+                    <div class="usa-card-header">
+                        <h5><i class="fas fa-briefcase me-2"></i>Michael T.</h5>
+                        <small class="text-muted">Bahir Dar, Ethiopia</small>
+                    </div>
+                    <div class="usa-card-body">
+                        <p>"The step-by-step process and photo validation helped me avoid common mistakes. My family and I are now preparing for our new life in America!"</p>
+                        <div class="usa-alert usa-alert-success">
+                            <i class="fas fa-check-circle me-2"></i>Selected for DV-2026
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-md-4 mb-4">
+                <div class="usa-card">
+                    <div class="usa-card-header">
+                        <h5><i class="fas fa-heart me-2"></i>Elena K.</h5>
+                        <small class="text-muted">Dire Dawa, Ethiopia</small>
+                    </div>
+                    <div class="usa-card-body">
+                        <p>"I was skeptical at first, but the professional service and 24/7 support convinced me. Now I'm one of the lucky ones selected for DV-2026!"</p>
+                        <div class="usa-alert usa-alert-success">
+                            <i class="fas fa-check-circle me-2"></i>Selected for DV-2026
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="text-center mt-4">
+            <div class="usa-alert">
+                <h5><i class="fas fa-trophy me-2"></i>Join Our Success Stories!</h5>
+                <p class="mb-0">Over 1,900 Ethiopian families have successfully applied through our platform. Be the next success story!</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Services -->
+<section class="usa-section">
+    <div class="container">
+        <h2 class="text-center mb-5">Our Services</h2>
+        <div class="row">
+            <div class="col-md-4 mb-4">
+                <div class="usa-card">
+                    <div class="usa-card-header">
+                        <h4><i class="fas fa-file-alt me-2"></i>Application Assistance</h4>
+                    </div>
+                    <div class="usa-card-body">
+                        <p>Professional guidance through the entire DV application process with AI-powered validation to ensure accuracy.</p>
+                        <a href="{% url 'core:instructions' %}" class="usa-button">Learn More</a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-md-4 mb-4">
+                <div class="usa-card">
+                    <div class="usa-card-header">
+                        <h4><i class="fas fa-camera me-2"></i>Photo Validation</h4>
+                    </div>
+                    <div class="usa-card-body">
+                        <p>AI-powered photo validation to ensure your photos meet US DV requirements including white background.</p>
+                        <a href="{% url 'core:instructions' %}" class="usa-button">Learn More</a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-md-4 mb-4">
+                <div class="usa-card">
+                    <div class="usa-card-header">
+                        <h4><i class="fas fa-headset me-2"></i>24/7 Support</h4>
+                    </div>
+                    <div class="usa-card-body">
+                        <p>Round-the-clock support via Telegram (@dv2027apply) and phone (+251-963-173-312) for all your questions.</p>
+                        <a href="{% url 'core:contact' %}" class="usa-button">Contact Us</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Announcements -->
+{% if announcements %}
+<section class="usa-section">
+    <div class="container">
+        <h2 class="text-center mb-5">Latest Announcements</h2>
+        <div class="row">
+            {% for announcement in announcements %}
+            <div class="col-md-4 mb-4">
+                <div class="usa-card">
+                    <div class="usa-card-header">
+                        <h5>{{ announcement.title }}</h5>
+                        <small class="text-muted">{{ announcement.created_at|date:"M d, Y" }}</small>
+                    </div>
+                    <div class="usa-card-body">
+                        <p>{{ announcement.content|truncatewords:20 }}</p>
+                        {% if announcement.announcement_type == 'info' %}
+                        <div class="usa-alert">
+                            <i class="fas fa-info-circle me-2"></i>Information
+                        </div>
+                        {% elif announcement.announcement_type == 'warning' %}
+                        <div class="usa-alert usa-alert-warning">
+                            <i class="fas fa-exclamation-triangle me-2"></i>Important Notice
+                        </div>
+                        {% elif announcement.announcement_type == 'success' %}
+                        <div class="usa-alert usa-alert-success">
+                            <i class="fas fa-check-circle me-2"></i>Success
+                        </div>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+{% endif %}
+
+<!-- Call to Action -->
+<section class="usa-section">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-8 text-center">
+                <h2>Ready to Join Our Success Stories?</h2>
+                <p class="lead mb-4">
+                    Don't miss your chance to participate in the DV-2027 program. 
+                    Join <strong>984 successful applicants</strong> who achieved their American Dream with our professional assistance.
+                </p>
+                
+                <div class="row justify-content-center mb-4">
+                    <div class="col-md-10">
+                        <div class="usa-alert usa-alert-success">
+                            <h5><i class="fas fa-trophy me-2"></i>Limited Time Offer</h5>
+                            <p class="mb-0">
+                                <strong>Early Bird Special:</strong> Get professional assistance for DV-2027 application. 
+                                Our team has helped over 984 Ethiopian families successfully apply!
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                
+                {% if not user.is_authenticated %}
+                <a href="/applications/status/" class="usa-button me-3">
+                    <i class="fas fa-search me-2"></i>
+                    Check Status
+                </a>
+                {% endif %}
+                <a href="{% url 'core:contact' %}" class="usa-button usa-button-secondary">
+                    <i class="fas fa-comments me-2"></i>
+                    Get Support
+                </a>
+                
+                <div class="mt-4">
+                    <p class="text-muted">
+                        <i class="fas fa-shield-alt me-2"></i>
+                        <strong>Secure & Confidential:</strong> Your information is protected with enterprise-grade security.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Footer Information -->
+<section class="usa-footer-info">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <h5>Contact Information</h5>
+                <p><strong>Telegram:</strong> @dv2027apply</p>
+                <p><strong>Phone:</strong> +251-963-173-312</p>
+                <p><strong>Email:</strong> support@dvportal-ethiopia.com</p>
+            </div>
+            <div class="col-md-6">
+                <h5>Payment Information</h5>
+                <p><strong>Bank:</strong> Commercial Bank of Ethiopia (CBE)</p>
+                <p><strong>Account:</strong> 1000674773319</p>
+                <p><strong>Account Name:</strong> Mr. Esayas Desta</p>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

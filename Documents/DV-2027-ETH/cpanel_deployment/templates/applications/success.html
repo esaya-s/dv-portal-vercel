@@ -1,0 +1,70 @@
+{% extends 'base.html' %}
+
+{% block title %}Application Submitted Successfully - DV Portal Ethiopia{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            <div class="card shadow-sm">
+                <div class="card-header bg-success text-white text-center py-4">
+                    <h2 class="mb-0"><i class="fas fa-check-circle me-2"></i>Application Submitted Successfully</h2>
+                </div>
+                <div class="card-body p-5 text-center">
+                    <div class="mb-4">
+                        <div class="display-1 text-success">
+                            <i class="fas fa-check-circle"></i>
+                        </div>
+                    </div>
+                    
+                    <h3 class="mb-3">Your application has been received!</h3>
+                    
+                    <div class="alert alert-info mb-4">
+                        <h4 class="alert-heading">Your Application ID</h4>
+                        <p class="display-6 fw-bold mb-0">{{ application.dv_id }}</p>
+                        <p class="small mt-2 mb-0">Please save this ID for future reference</p>
+                    </div>
+                    
+                    <p class="lead">
+                        Thank you for submitting your application through DV Portal Ethiopia.
+                        Your application is now being processed.
+                    </p>
+                    
+                    <div class="card mb-4">
+                        <div class="card-header bg-light">
+                            <h5 class="mb-0">Next Steps</h5>
+                        </div>
+                        <div class="card-body">
+                            <ol class="text-start">
+                                <li class="mb-2">
+                                    You will receive a confirmation message on Telegram from <strong>{{ telegram_bot_username }}</strong>
+                                    {% if telegram_bot_link %}
+                                    <div class="alert alert-info mt-2">
+                                        <p><i class="fas fa-info-circle me-2"></i> Click the button below to start the Telegram bot and receive your confirmation:</p>
+                                        <a href="{{ telegram_bot_link }}" target="_blank" class="btn btn-primary btn-sm">
+                                            <i class="fab fa-telegram me-2"></i>Open Telegram Bot
+                                        </a>
+                                    </div>
+                                    {% endif %}
+                                </li>
+                                <li class="mb-2">Our team will verify your payment and photo within 24-48 hours</li>
+                                <li class="mb-2">If there are any issues with your application, we will contact you</li>
+                                <li class="mb-2">You can check your application status anytime using your Application ID</li>
+                            </ol>
+                        </div>
+                    </div>
+                    
+                    <div class="d-grid gap-3">
+                        <a href="{% url 'applications:status' %}" class="btn btn-primary btn-lg">
+                            <i class="fas fa-search me-2"></i>Check Application Status
+                        </a>
+                        <a href="{% url 'core:home' %}" class="btn btn-outline-secondary">
+                            <i class="fas fa-home me-2"></i>Return to Homepage
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,227 @@
+{% extends 'base.html' %}
+
+{% block title %}My Profile - DV Portal Ethiopia{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <div class="row">
+        <div class="col-lg-10 mx-auto">
+            <h1 class="mb-4">My Profile</h1>
+            
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="card mb-4">
+                        <div class="card-header bg-primary text-white">
+                            <h4 class="mb-0">Profile Information</h4>
+                        </div>
+                        <div class="card-body text-center">
+                            <div class="mb-4">
+                                <div class="bg-light rounded-circle d-flex align-items-center justify-content-center mx-auto" style="width: 100px; height: 100px;">
+                                    <i class="fas fa-user fa-3x text-primary"></i>
+                                </div>
+                            </div>
+                            
+                            <h5>{{ user.get_full_name }}</h5>
+                            <p class="text-muted mb-0">{{ user.email }}</p>
+                            <p class="text-muted">{{ user.username }}</p>
+                            
+                            <div class="d-grid gap-2 mt-3">
+                                <a href="{% url 'accounts:profile_edit' %}" class="btn btn-primary">
+                                    <i class="fas fa-edit me-2"></i>Edit Profile
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="card mb-4 mb-md-0">
+                        <div class="card-header bg-primary text-white">
+                            <h4 class="mb-0">Account Status</h4>
+                        </div>
+                        <div class="card-body">
+                            <div class="mb-3">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <span>Email Verification</span>
+                                    <span class="badge bg-warning">Pending</span>
+                                </div>
+                                <div class="progress mt-2" style="height: 5px;">
+                                    <div class="progress-bar bg-warning" role="progressbar" style="width: 50%"></div>
+                                </div>
+                            </div>
+                            
+                            <div class="mb-3">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <span>Phone Verification</span>
+                                    <span class="badge bg-warning">Pending</span>
+                                </div>
+                                <div class="progress mt-2" style="height: 5px;">
+                                    <div class="progress-bar bg-warning" role="progressbar" style="width: 50%"></div>
+                                </div>
+                            </div>
+                            
+                            <div class="mb-3">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <span>Profile Completion</span>
+                                    <span class="badge bg-success">75%</span>
+                                </div>
+                                <div class="progress mt-2" style="height: 5px;">
+                                    <div class="progress-bar bg-success" role="progressbar" style="width: 75%"></div>
+                                </div>
+                            </div>
+                            
+                            <div class="d-grid gap-2 mt-4">
+                                <a href="{% url 'accounts:verify_email' token='verify' %}" class="btn btn-outline-primary btn-sm">
+                                    <i class="fas fa-envelope me-2"></i>Verify Email
+                                </a>
+                                <a href="{% url 'accounts:verify_phone' %}" class="btn btn-outline-primary btn-sm">
+                                    <i class="fas fa-phone me-2"></i>Verify Phone
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-8">
+                    <div class="card mb-4">
+                        <div class="card-header bg-primary text-white">
+                            <h4 class="mb-0">Personal Information</h4>
+                        </div>
+                        <div class="card-body">
+                            <div class="row mb-3">
+                                <div class="col-sm-4">
+                                    <strong>Full Name</strong>
+                                </div>
+                                <div class="col-sm-8">
+                                    {{ user.get_full_name }}
+                                </div>
+                            </div>
+                            
+                            <div class="row mb-3">
+                                <div class="col-sm-4">
+                                    <strong>Email Address</strong>
+                                </div>
+                                <div class="col-sm-8">
+                                    {{ user.email }}
+                                </div>
+                            </div>
+                            
+                            <div class="row mb-3">
+                                <div class="col-sm-4">
+                                    <strong>Phone Number</strong>
+                                </div>
+                                <div class="col-sm-8">
+                                    {{ user.phone_number|default:"Not provided" }}
+                                </div>
+                            </div>
+                            
+                            <div class="row mb-3">
+                                <div class="col-sm-4">
+                                    <strong>Date of Birth</strong>
+                                </div>
+                                <div class="col-sm-8">
+                                    Not provided
+                                </div>
+                            </div>
+                            
+                            <div class="row mb-3">
+                                <div class="col-sm-4">
+                                    <strong>Country of Birth</strong>
+                                </div>
+                                <div class="col-sm-8">
+                                    Not provided
+                                </div>
+                            </div>
+                            
+                            <div class="row mb-3">
+                                <div class="col-sm-4">
+                                    <strong>Country of Citizenship</strong>
+                                </div>
+                                <div class="col-sm-8">
+                                    Not provided
+                                </div>
+                            </div>
+                            
+                            <div class="row mb-3">
+                                <div class="col-sm-4">
+                                    <strong>Gender</strong>
+                                </div>
+                                <div class="col-sm-8">
+                                    Not provided
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="card mb-4">
+                        <div class="card-header bg-primary text-white">
+                            <h4 class="mb-0">Address Information</h4>
+                        </div>
+                        <div class="card-body">
+                            <div class="row mb-3">
+                                <div class="col-sm-4">
+                                    <strong>Address</strong>
+                                </div>
+                                <div class="col-sm-8">
+                                    Not provided
+                                </div>
+                            </div>
+                            
+                            <div class="row mb-3">
+                                <div class="col-sm-4">
+                                    <strong>City</strong>
+                                </div>
+                                <div class="col-sm-8">
+                                    Not provided
+                                </div>
+                            </div>
+                            
+                            <div class="row mb-3">
+                                <div class="col-sm-4">
+                                    <strong>Postal Code</strong>
+                                </div>
+                                <div class="col-sm-8">
+                                    Not provided
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="card">
+                        <div class="card-header bg-primary text-white">
+                            <h4 class="mb-0">Account Security</h4>
+                        </div>
+                        <div class="card-body">
+                            <div class="row mb-3">
+                                <div class="col-sm-4">
+                                    <strong>Password</strong>
+                                </div>
+                                <div class="col-sm-8">
+                                    ••••••••••
+                                    <a href="#" class="ms-2 text-primary">Change</a>
+                                </div>
+                            </div>
+                            
+                            <div class="row mb-3">
+                                <div class="col-sm-4">
+                                    <strong>Last Login</strong>
+                                </div>
+                                <div class="col-sm-8">
+                                    {{ user.last_login|date:"F j, Y, g:i a" }}
+                                </div>
+                            </div>
+                            
+                            <div class="row mb-3">
+                                <div class="col-sm-4">
+                                    <strong>Account Created</strong>
+                                </div>
+                                <div class="col-sm-8">
+                                    {{ user.date_joined|date:"F j, Y" }}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
