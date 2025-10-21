@@ -30,6 +30,9 @@ tests/
 # Documentation
 *.md
 !README.md
+*.txt
+!requirements.txt
+!runtime.txt
 
 # Build artifacts
 *.egg-info/
@@ -48,4 +51,8 @@ diagnose_*.py
 smart_setup.py
 simple_setup.py
 essential_tables.py
+
+# Extra requirements files (use only requirements.txt)
+requirements_*.txt
+cpanel_deployment/
 

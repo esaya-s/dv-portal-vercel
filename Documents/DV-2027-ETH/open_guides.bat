@@ -4,7 +4,10 @@ echo Opening Deployment Guides
 echo ============================================================
 echo.
 
-REM Open all documentation files
+REM Open most important file first
+start FINAL_FIX_SUMMARY.txt
+timeout /t 2 /nobreak >nul
+
 start START_HERE.txt
 timeout /t 2 /nobreak >nul
 
@@ -29,6 +32,8 @@ start https://vercel.com/dashboard
 
 echo.
 echo ✅ Done! Check the opened files and browser tabs.
+echo.
+echo 📌 Start with FINAL_FIX_SUMMARY.txt for the complete overview!
 echo.
 pause
 
