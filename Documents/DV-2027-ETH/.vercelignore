@@ -1,0 +1,51 @@
+# Vercel ignore file
+# Files and directories to ignore during build
+
+# Development files
+*.pyc
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Local development
+.env
+.env.local
+*.log
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Test files
+test_*.py
+*_test.py
+tests/
+
+# Documentation
+*.md
+!README.md
+
+# Build artifacts
+*.egg-info/
+dist/
+build/
+
+# Deployment scripts
+*.bat
+*.sh
+deploy_*.py
+push_*.py
+create_*.py
+fix_*.py
+debug_*.py
+diagnose_*.py
+smart_setup.py
+simple_setup.py
+essential_tables.py
+
